@@ -226,8 +226,8 @@ export default function Certificates() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-1/3 w-[550px] h-[550px] bg-indigo-600/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-purple-600/5 blur-[160px] rounded-full" />
+        <div className="absolute top-1/4 left-1/3 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[160px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12">
@@ -241,13 +241,13 @@ export default function Certificates() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
-            <Award className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
+            <Award className="w-3.5 h-3.5 text-[#FF8A00]" />
             <span>05 &bull; CERTIFICATES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Verified{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent">
               Certificates
             </span>
           </h2>
@@ -264,7 +264,7 @@ export default function Certificates() {
           <nav
             role="tablist"
             aria-label="Certificate Category Filter"
-            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-inner max-w-full"
+            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-inner max-w-full"
           >
             {CERTIFICATE_CATEGORIES.map((tab) => {
               const isActive = activeCategory === tab.id;
@@ -283,7 +283,7 @@ export default function Certificates() {
                     setActiveCategory(tab.id);
                     setActiveIndex(0);
                   }}
-                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 flex items-center gap-1.5 cursor-pointer ${
+                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] flex items-center gap-1.5 cursor-pointer ${
                     isActive
                       ? "text-white"
                       : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
@@ -292,7 +292,7 @@ export default function Certificates() {
                   {isActive && (
                     <motion.div
                       layoutId="active-cert-filter"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-blue-500/10 border border-indigo-400/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+                      className="absolute inset-0 rounded-xl bg-[#191C20] border border-[#292D32] shadow-[0_0_12px_rgba(255,138,0,0.15)]"
                       transition={
                         shouldReduceMotion
                           ? { duration: 0 }
@@ -304,7 +304,7 @@ export default function Certificates() {
                   <span
                     className={`relative z-10 text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
                       isActive
-                        ? "bg-indigo-500/30 text-indigo-200"
+                        ? "bg-[#FF8A00]/20 text-[#FFB020]"
                         : "bg-white/[0.06] text-zinc-500"
                     }`}
                   >
@@ -330,7 +330,7 @@ export default function Certificates() {
           onMouseMove={handleMouseMoveStage}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="relative w-full overflow-hidden select-none py-6 sm:py-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-3xl"
+          className="relative w-full overflow-hidden select-none py-6 sm:py-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] rounded-3xl"
         >
           {/* 3D Perspective Viewport */}
           <div
@@ -396,16 +396,16 @@ export default function Certificates() {
                     {isCenter && (
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-2 rounded-3xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-indigo-500/20 blur-xl opacity-75"
+                        className="pointer-events-none absolute -inset-2 rounded-3xl bg-gradient-to-r from-[#FF8A00]/15 via-amber-500/15 to-[#FF8A00]/15 blur-xl opacity-60"
                       />
                     )}
 
                     {/* Physical Display Card Panel */}
                     <article
-                      className={`group relative rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#121420] via-[#0d0e17] to-[#0a0b12] border transition-all duration-300 flex flex-col justify-between overflow-hidden ${
+                      className={`group relative rounded-2xl sm:rounded-3xl bg-[#15181B] border transition-all duration-300 flex flex-col justify-between overflow-hidden ${
                         isCenter
-                          ? "border-indigo-400/50 shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_35px_rgba(99,102,241,0.25)] hover:border-indigo-400/70"
-                          : "border-white/[0.08] shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-indigo-400/40"
+                          ? "border-[#FF8A00]/50 shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_30px_rgba(255,138,0,0.18)] hover:border-[#FF8A00]/70"
+                          : "border-[#292D32] shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-[#FF8A00]/30"
                       }`}
                     >
                       {/* Physical Lighting Shading Overlay (Darker when further back in 3D) */}
@@ -418,12 +418,12 @@ export default function Certificates() {
                       {/* Top Specular Sheen Highlight */}
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent z-20"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20"
                       />
 
                       <div>
                         {/* Certificate Preview Image */}
-                        <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#0c0d16] border-b border-white/[0.06]">
+                        <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#101214] border-b border-[#292D32]">
                           <Image
                             src={cert.image}
                             alt={`${cert.title} Certificate`}
@@ -434,12 +434,12 @@ export default function Certificates() {
                           />
                           <div
                             aria-hidden="true"
-                            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0b12] via-transparent to-transparent opacity-80"
+                            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0D0F] via-transparent to-transparent opacity-80"
                           />
 
                           {/* Top Badges */}
                           <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                            <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-300 bg-[#08090d]/85 border border-white/10 px-2.5 py-1 rounded-full backdrop-blur-md">
+                            <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-300 bg-[#0B0D0F]/85 border border-[#292D32] px-2.5 py-1 rounded-full backdrop-blur-md">
                               {cert.category}
                             </span>
                             <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full backdrop-blur-md">
@@ -454,8 +454,8 @@ export default function Certificates() {
                               {cert.issuer}
                             </span>
                             {cert.duration && (
-                              <span className="inline-flex items-center gap-1 text-zinc-300 bg-black/60 px-2 py-0.5 rounded-md backdrop-blur-sm border border-white/10">
-                                <Clock className="w-3 h-3 text-indigo-400" />
+                              <span className="inline-flex items-center gap-1 text-zinc-300 bg-[#0B0D0F]/70 px-2 py-0.5 rounded-md backdrop-blur-sm border border-[#292D32]">
+                                <Clock className="w-3 h-3 text-[#FF8A00]" />
                                 <span>{cert.duration}</span>
                               </span>
                             )}
@@ -467,7 +467,7 @@ export default function Certificates() {
                           <div>
                             <div className="flex items-center justify-between gap-2 text-xs font-mono text-zinc-500 mb-1.5">
                               <span className="inline-flex items-center gap-1.5">
-                                <Calendar className="w-3.5 h-3.5 text-indigo-400" />
+                                <Calendar className="w-3.5 h-3.5 text-[#FF8A00]" />
                                 <span>{cert.date}</span>
                               </span>
                               {cert.credentialId && (
@@ -476,7 +476,7 @@ export default function Certificates() {
                                 </span>
                               )}
                             </div>
-                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-200 transition-colors leading-snug line-clamp-2">
+                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#FFB020] transition-colors leading-snug line-clamp-2">
                               {cert.title}
                             </h3>
                           </div>
@@ -486,9 +486,9 @@ export default function Certificates() {
                             {cert.skills.slice(0, 3).map((skill) => (
                               <span
                                 key={skill}
-                                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-white/[0.04] border border-white/[0.08] text-zinc-300"
+                                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-[#191C20] border border-[#292D32] text-zinc-300"
                               >
-                                <CheckCircle2 className="w-2.5 h-2.5 text-indigo-400" />
+                                <CheckCircle2 className="w-2.5 h-2.5 text-[#FF8A00]" />
                                 <span>{skill}</span>
                               </span>
                             ))}
@@ -502,7 +502,7 @@ export default function Certificates() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="p-5 pt-0 sm:p-6 sm:pt-0 border-t border-white/[0.04] mt-2 flex items-center gap-2 relative z-30">
+                      <div className="p-5 pt-0 sm:p-6 sm:pt-0 border-t border-[#292D32] mt-2 flex items-center gap-2 relative z-30">
                         {cert.pdfUrl ? (
                           <a
                             href={cert.pdfUrl}
@@ -515,10 +515,10 @@ export default function Certificates() {
                                 setActiveIndex(index);
                               }
                             }}
-                            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer shadow-sm"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-[#0B0D0F] bg-[#191C20] hover:bg-[#FF8A00] border border-[#292D32] hover:border-[#FF8A00] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer shadow-sm"
                             aria-label={`View PDF certificate for ${cert.title}`}
                           >
-                            <FileText className="w-4 h-4 text-indigo-400" />
+                            <FileText className="w-4 h-4 text-[#FF8A00] transition-colors group-hover/btn:text-[#0B0D0F]" />
                             <span>View Certificate (PDF)</span>
                           </a>
                         ) : (
@@ -533,10 +533,10 @@ export default function Certificates() {
                                 setActiveIndex(index);
                               }
                             }}
-                            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer shadow-sm"
+                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-[#0B0D0F] bg-[#191C20] hover:bg-[#FF8A00] border border-[#292D32] hover:border-[#FF8A00] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer shadow-sm"
                             aria-label={`View certificate image for ${cert.title}`}
                           >
-                            <FileText className="w-4 h-4 text-indigo-400" />
+                            <FileText className="w-4 h-4 text-[#FF8A00] transition-colors group-hover/btn:text-[#0B0D0F]" />
                             <span>View Certificate</span>
                           </a>
                         )}
@@ -553,7 +553,7 @@ export default function Certificates() {
                 type="button"
                 onClick={goToPrev}
                 aria-label="Previous certificate in 3D carousel"
-                className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#0d0e17]/80 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400/50 text-zinc-300 hover:text-white backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer group"
+                className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#15181B]/90 hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-300 hover:text-[#FFB020] backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer group"
               >
                 <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:-translate-x-0.5" />
               </button>
@@ -565,7 +565,7 @@ export default function Certificates() {
                 type="button"
                 onClick={goToNext}
                 aria-label="Next certificate in 3D carousel"
-                className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#0d0e17]/80 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-400/50 text-zinc-300 hover:text-white backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer group"
+                className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#15181B]/90 hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-300 hover:text-[#FFB020] backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer group"
               >
                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
@@ -593,9 +593,9 @@ export default function Certificates() {
                       aria-selected={isCurrent}
                       aria-label={`Go to certificate ${i + 1}: ${c.title}`}
                       onClick={() => setActiveIndex(i)}
-                      className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer ${
+                      className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer ${
                         isCurrent
-                          ? "w-8 bg-gradient-to-r from-indigo-500 to-purple-500 shadow-[0_0_12px_rgba(99,102,241,0.5)]"
+                          ? "w-8 bg-gradient-to-r from-[#FF8A00] to-[#FFB020] shadow-[0_0_12px_rgba(255,138,0,0.4)]"
                           : "w-2 bg-white/20 hover:bg-white/40"
                       }`}
                     />
@@ -604,7 +604,7 @@ export default function Certificates() {
               </div>
 
               {/* Status Pill: Counter & Autoplay Toggle */}
-              <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-zinc-400 backdrop-blur-md">
+              <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-[#15181B] border border-[#292D32] text-xs font-mono text-zinc-400 backdrop-blur-md">
                 <span className="text-zinc-200 font-semibold">
                   0{safeActiveIndex + 1}
                 </span>
@@ -622,11 +622,11 @@ export default function Certificates() {
                       ? "Pause certificate autoplay"
                       : "Start certificate autoplay"
                   }
-                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-indigo-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#FFB020] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF8A00] cursor-pointer"
                 >
                   {isPlaying ? (
                     <>
-                      <Pause className="w-3 h-3 text-indigo-400" />
+                      <Pause className="w-3 h-3 text-[#FF8A00]" />
                       <span className="text-[11px]">Auto 5s</span>
                     </>
                   ) : (

@@ -147,7 +147,7 @@ export default function Header() {
       role="banner"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#090a0f]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3"
+          ? "bg-[#0B0D0F]/90 backdrop-blur-md border-b border-[#292D32] shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3"
           : "bg-transparent border-b border-transparent py-4 sm:py-5"
       }`}
     >
@@ -157,27 +157,27 @@ export default function Header() {
           <a
             href="#home"
             onClick={(e) => scrollToSection(e, "#home", "home")}
-            className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg p-1 transition-transform active:scale-95"
+            className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] rounded-lg p-1 transition-transform active:scale-95"
             aria-label="Sandesh Portfolio Home"
           >
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#0c0d16] via-[#101222] to-[#151228] border border-indigo-500/30 flex items-center justify-center p-1.5 shadow-[0_0_18px_rgba(99,102,241,0.25)] group-hover:border-indigo-400/70 group-hover:shadow-[0_0_24px_rgba(99,102,241,0.5)] transition-all duration-300">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#15181B] border border-[#292D32] flex items-center justify-center p-1.5 shadow-[0_0_15px_rgba(255,138,0,0.15)] group-hover:border-[#FF8A00]/60 group-hover:shadow-[0_0_20px_rgba(255,138,0,0.3)] transition-all duration-300">
               <Image
                 src="/images/logo-icon.png"
                 alt="Sandesh Waghmare Logo"
                 width={40}
                 height={40}
                 priority
-                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(255,138,0,0.35)] group-hover:scale-110 transition-transform duration-300"
               />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1 font-sans leading-none">
-                <span className="font-extrabold tracking-wider text-base sm:text-lg text-white group-hover:text-indigo-300 transition-colors">
+                <span className="font-extrabold tracking-wider text-base sm:text-lg text-white group-hover:text-[#FFB020] transition-colors">
                   SANDESH
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00] animate-pulse" />
               </div>
-              <span className="text-[9px] font-mono tracking-[0.2em] text-indigo-300/70 uppercase group-hover:text-indigo-200 transition-colors mt-0.5">
+              <span className="text-[9px] font-mono tracking-[0.2em] text-[#FF8A00] uppercase group-hover:text-[#FFB020] transition-colors mt-0.5">
                 WAGHMARE
               </span>
             </div>
@@ -186,7 +186,7 @@ export default function Header() {
           {/* Desktop Navigation Links */}
           <nav
             aria-label="Primary Navigation"
-            className="hidden lg:flex items-center rounded-full bg-white/[0.03] border border-white/[0.08] p-1 shadow-inner backdrop-blur-md"
+            className="hidden lg:flex items-center rounded-full bg-[#101214]/85 border border-[#292D32] p-1 shadow-inner backdrop-blur-md"
           >
             <ul className="flex items-center gap-0.5 list-none m-0 p-0">
               {NAV_ITEMS.map((item: NavItem) => {
@@ -197,7 +197,7 @@ export default function Header() {
                       href={item.href}
                       onClick={(e) => scrollToSection(e, item.href, item.id)}
                       aria-current={isActive ? "page" : undefined}
-                      className={`relative px-3 py-1.5 text-xs xl:text-sm font-medium transition-colors duration-200 rounded-full block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+                      className={`relative px-3 py-1.5 text-xs xl:text-sm font-medium transition-colors duration-200 rounded-full block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
                         isActive
                           ? "text-white"
                           : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
@@ -207,14 +207,14 @@ export default function Header() {
                       {isActive && (
                         <motion.div
                           layoutId="desktop-active-indicator"
-                          className="absolute inset-0 rounded-full bg-white/[0.09] border border-white/10 shadow-[0_0_16px_rgba(99,102,241,0.18)]"
+                          className="absolute inset-0 rounded-full bg-[#191C20] border border-[#292D32] shadow-[0_0_12px_rgba(255,138,0,0.15)]"
                           transition={springTransition}
                         />
                       )}
                       {isActive && (
                         <motion.span
                           layoutId="desktop-active-dot"
-                          className="absolute -bottom-1 left-3 right-3 h-[2px] bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 rounded-full"
+                          className="absolute -bottom-1 left-3 right-3 h-[2px] bg-gradient-to-r from-[#FF8A00] to-[#FFB020] rounded-full"
                           transition={springTransition}
                         />
                       )}
@@ -232,23 +232,23 @@ export default function Header() {
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact", "contact")}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.25)] hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all duration-200 border border-indigo-400/30 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-full bg-[#FF8A00] hover:bg-[#E86F00] text-[#0B0D0F] shadow-[0_0_15px_rgba(255,138,0,0.3)] hover:shadow-[0_0_20px_rgba(255,138,0,0.45)] transition-all duration-200 border border-[#FFB020]/40 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
             >
               <span>Get in Touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-indigo-200" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#0B0D0F]" />
             </a>
 
             {/* Mobile Hamburger Toggle Button */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              className="lg:hidden p-2 rounded-xl text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-[#292D32] hover:border-[#FF8A00]/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-indigo-400" />
+                <X className="w-5 h-5 text-[#FF8A00]" />
               ) : (
                 <Menu className="w-5 h-5" />
               )}
@@ -270,7 +270,7 @@ export default function Header() {
           >
             <nav
               aria-label="Mobile Navigation"
-              className="max-w-7xl mx-auto rounded-2xl bg-[#0d0e15]/95 border border-white/[0.1] backdrop-blur-2xl p-3 shadow-2xl shadow-black/80"
+              className="max-w-7xl mx-auto rounded-2xl bg-[#101214]/95 border border-[#292D32] backdrop-blur-2xl p-3 shadow-2xl shadow-black/80"
             >
               <ul className="flex flex-col gap-1 list-none m-0 p-0">
                 {NAV_ITEMS.map((item: NavItem, index: number) => {
@@ -286,9 +286,9 @@ export default function Header() {
                         href={item.href}
                         onClick={(e) => scrollToSection(e, item.href, item.id)}
                         aria-current={isActive ? "page" : undefined}
-                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
                           isActive
-                            ? "bg-gradient-to-r from-indigo-500/15 via-purple-500/10 to-transparent text-white border-l-2 border-indigo-500 font-semibold"
+                            ? "bg-[#15181B] text-white border-l-2 border-[#FF8A00] font-semibold"
                             : "text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.04]"
                         }`}
                       >
@@ -299,7 +299,7 @@ export default function Header() {
                           <span>{item.label}</span>
                         </div>
                         {isActive && (
-                          <span className="flex items-center gap-1 text-xs text-indigo-400">
+                          <span className="flex items-center gap-1 text-xs text-[#FF8A00]">
                             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                             <span>Active</span>
                           </span>
@@ -311,14 +311,14 @@ export default function Header() {
               </ul>
 
               {/* Mobile CTA */}
-              <div className="mt-3 pt-3 border-t border-white/[0.06]">
+              <div className="mt-3 pt-3 border-t border-[#292D32]">
                 <a
                   href="#contact"
                   onClick={(e) => scrollToSection(e, "#contact", "contact")}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-xs font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md shadow-indigo-500/20 transition-all duration-200 active:scale-[0.98]"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-xs font-bold rounded-xl bg-[#FF8A00] hover:bg-[#E86F00] text-[#0B0D0F] shadow-md shadow-[#FF8A00]/20 transition-all duration-200 active:scale-[0.98]"
                 >
                   <span>Connect With Sandesh</span>
-                  <ArrowUpRight className="w-4 h-4 text-indigo-200" />
+                  <ArrowUpRight className="w-4 h-4 text-[#0B0D0F]" />
                 </a>
               </div>
             </nav>

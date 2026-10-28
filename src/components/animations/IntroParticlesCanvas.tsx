@@ -48,10 +48,10 @@ export default function IntroParticlesCanvas({
 
     // Particle colors matching portfolio theme
     const colors = [
-      "rgba(165, 180, 252,", // Indigo-300
-      "rgba(192, 132, 252,", // Purple-300
-      "rgba(147, 197, 253,", // Blue-300
-      "rgba(224, 231, 255,", // Indigo-100
+      "rgba(255, 176, 32,", // Amber-300
+      "rgba(255, 138, 0,",  // Primary Orange
+      "rgba(255, 159, 28,", // Warm Amber
+      "rgba(245, 245, 245,", // Soft White
     ];
 
     // Responsive particle count (fewer on mobile for peak performance)
@@ -108,7 +108,7 @@ export default function IntroParticlesCanvas({
           if (dist < maxDist) {
             const lineAlpha = (1 - dist / maxDist) * 0.12;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(129, 140, 248, ${lineAlpha})`;
+            ctx.strokeStyle = `rgba(255, 138, 0, ${lineAlpha})`;
             ctx.lineWidth = 0.6;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -166,7 +166,7 @@ export default function IntroParticlesCanvas({
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${Math.max(0, Math.min(1, p.alpha))})`;
         ctx.shadowBlur = 8;
-        ctx.shadowColor = "rgba(129, 140, 248, 0.4)";
+        ctx.shadowColor = "rgba(255, 138, 0, 0.4)";
         ctx.fill();
         ctx.shadowBlur = 0;
       }

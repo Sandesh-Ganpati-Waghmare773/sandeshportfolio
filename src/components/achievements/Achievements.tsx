@@ -67,8 +67,8 @@ export default function Achievements() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-amber-500/5 blur-[150px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-indigo-600/5 blur-[150px] rounded-full" />
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#FF8A00]/5 blur-[150px] rounded-full" />
+        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-amber-600/5 blur-[150px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">
@@ -82,13 +82,13 @@ export default function Achievements() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
-            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
+            <Trophy className="w-3.5 h-3.5 text-[#FF8A00]" />
             <span>04 &bull; HONORS &amp; IMPACT</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Recognitions &amp;{" "}
-            <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-indigo-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent">
               Milestones
             </span>
           </h2>
@@ -124,8 +124,8 @@ export default function Achievements() {
                 }
                 className={`group relative p-6 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 flex flex-col justify-between backdrop-blur-xl ${
                   isTop
-                    ? "bg-gradient-to-b from-amber-500/[0.08] via-white/[0.02] to-transparent border-amber-500/30 hover:border-amber-400/50 shadow-lg shadow-amber-500/5"
-                    : "bg-gradient-to-b from-white/[0.04] to-white/[0.01] border-white/[0.08] hover:border-indigo-400/40 hover:bg-white/[0.06]"
+                    ? "bg-[#15181B] border-[#FF8A00]/40 hover:border-[#FF8A00]/70 shadow-lg shadow-[rgba(255,138,0,0.06)]"
+                    : "bg-[#15181B] border-[#292D32] hover:border-[#FF8A00]/40"
                 }`}
               >
                 <div className="space-y-4">
@@ -134,15 +134,15 @@ export default function Achievements() {
                     <div
                       className={`w-11 h-11 rounded-2xl flex items-center justify-center border shadow-sm transition-transform duration-200 group-hover:scale-105 ${
                         isTop
-                          ? "bg-amber-500/20 border-amber-400/30 text-amber-300"
-                          : "bg-white/[0.05] border-white/10 text-indigo-300 group-hover:border-indigo-400/50"
+                          ? "bg-[#FF8A00]/15 border-[#FF8A00]/30 text-[#FFB020]"
+                          : "bg-[#191C20] border-[#292D32] text-zinc-300 group-hover:text-white group-hover:border-[#FF8A00]/40"
                       }`}
                     >
                       <Icon className="w-5 h-5" />
                     </div>
 
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-zinc-300">
+                      <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-[#191C20] border border-[#292D32] text-zinc-300">
                         {item.metric}
                       </span>
                       <span className="text-[11px] font-mono text-zinc-500 flex items-center gap-1">
@@ -154,14 +154,14 @@ export default function Achievements() {
 
                   {/* Category Pill */}
                   <div className="pt-1">
-                    <span className="text-[11px] font-mono tracking-wider uppercase text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-mono tracking-wider uppercase text-[#FFB020] bg-[#FF8A00]/10 border border-[#FF8A00]/20 px-2.5 py-0.5 rounded-full">
                       {item.category}
                     </span>
                   </div>
 
                   {/* Title & Organization */}
                   <div className="space-y-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-indigo-200 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#FFB020] transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-400 flex items-center gap-1.5">
@@ -177,7 +177,7 @@ export default function Achievements() {
                 </div>
 
                 {/* Footer Badge */}
-                <div className="mt-6 pt-4 border-t border-white/[0.04] flex items-center justify-between text-xs">
+                <div className="mt-6 pt-4 border-t border-[#292D32] flex items-center justify-between text-xs">
                   <span className="text-zinc-500 font-mono">Status</span>
                   <span className="font-medium text-emerald-400 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />

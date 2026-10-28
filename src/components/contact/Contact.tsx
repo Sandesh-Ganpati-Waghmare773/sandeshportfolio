@@ -136,8 +136,8 @@ export default function Contact() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-indigo-600/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/5 blur-[150px] rounded-full" />
+        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
+        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[150px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-16 sm:space-y-20">
@@ -151,13 +151,13 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
-            <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
+            <MessageSquare className="w-3.5 h-3.5 text-[#FF8A00]" />
             <span>07 &bull; LET&apos;S CONNECT</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Start a Conversation &amp;{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent">
               Collaborate
             </span>
           </h2>
@@ -184,7 +184,7 @@ export default function Contact() {
             {/* Availability Status Card */}
             <motion.div
               variants={itemVariants}
-              className="p-6 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] backdrop-blur-md relative overflow-hidden"
+              className="p-6 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] backdrop-blur-md relative overflow-hidden"
             >
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-3 w-3">
@@ -203,13 +203,13 @@ export default function Contact() {
             {/* Direct Email Card with One-Click Copy */}
             <motion.div
               variants={itemVariants}
-              className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-indigo-900/20 via-purple-900/10 to-transparent border border-indigo-500/20 backdrop-blur-md space-y-4"
+              className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all backdrop-blur-md space-y-4"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-indigo-300 font-semibold">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#FFB020] font-semibold">
                   Direct Inquiries
                 </span>
-                <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                <div className="w-8 h-8 rounded-lg bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-center justify-center text-[#FF8A00]">
                   <Mail className="w-4 h-4" />
                 </div>
               </div>
@@ -220,7 +220,7 @@ export default function Contact() {
                   href={`mailto:${CONTACT_INFO.email}`}
                   aria-label="Email Sandesh Waghmare"
                   title="Email Sandesh Waghmare"
-                  className="text-lg sm:text-xl font-bold text-white hover:text-indigo-300 transition-colors break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-md"
+                  className="text-lg sm:text-xl font-bold text-white hover:text-[#FFB020] transition-colors break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] rounded-md"
                 >
                   {CONTACT_INFO.email}
                 </a>
@@ -232,7 +232,7 @@ export default function Contact() {
                   onClick={handleCopyEmail}
                   aria-label="Copy Sandesh Waghmare's email address"
                   title="Copy email address"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-zinc-200 hover:text-white transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#191C20] hover:bg-[#292D32] border border-[#292D32] text-zinc-200 hover:text-white transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                 >
                   {copiedEmail ? (
                     <>
@@ -241,7 +241,7 @@ export default function Contact() {
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5 text-indigo-300" />
+                      <Copy className="w-3.5 h-3.5 text-[#FF8A00]" />
                       <span>Copy Email</span>
                     </>
                   )}
@@ -251,7 +251,7 @@ export default function Contact() {
                   href={`mailto:${CONTACT_INFO.email}`}
                   aria-label="Email Sandesh Waghmare"
                   title="Email Sandesh Waghmare"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-indigo-200 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#FF8A00]/10 hover:bg-[#FF8A00]/20 border border-[#FF8A00]/30 text-[#FFB020] transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                 >
                   <span>Open Mail Client</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -277,14 +277,14 @@ export default function Contact() {
                         : {})}
                       aria-label={social.ariaLabel}
                       title={social.ariaLabel}
-                      className="group p-4 rounded-xl sm:rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-indigo-500/30 transition-all duration-200 flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                      className="group p-4 rounded-xl sm:rounded-2xl bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-200 flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-9 h-9 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:border-indigo-500/40 shrink-0 transition-colors">
+                        <div className="w-9 h-9 rounded-lg bg-[#191C20] border border-[#292D32] flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:border-[#FF8A00]/40 shrink-0 transition-colors">
                           <SocialIcon icon={social.icon} className="w-4 h-4" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-bold text-white group-hover:text-indigo-200 transition-colors truncate">
+                          <p className="text-xs font-bold text-white group-hover:text-[#FFB020] transition-colors truncate">
                             {social.name}
                           </p>
                           <p className="text-[11px] text-zinc-400 truncate">
@@ -293,9 +293,9 @@ export default function Contact() {
                         </div>
                       </div>
                       {isExternal ? (
-                        <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-indigo-300 transition-colors shrink-0 ml-2" />
+                        <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#FF8A00] transition-colors shrink-0 ml-2" />
                       ) : (
-                        <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-indigo-300 transition-colors shrink-0 ml-2" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#FF8A00] transition-colors shrink-0 ml-2" />
                       )}
                     </a>
                   );
@@ -306,14 +306,14 @@ export default function Contact() {
             {/* Location & Timezone info */}
             <motion.div
               variants={itemVariants}
-              className="p-4 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.05] flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400"
+              className="p-4 rounded-xl sm:rounded-2xl bg-[#15181B] border border-[#292D32] flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400"
             >
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-[#FF8A00] shrink-0" />
                 <span>{CONTACT_INFO.location}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                <Clock className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
                 <span>{CONTACT_INFO.timezone}</span>
               </div>
             </motion.div>
@@ -329,16 +329,16 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            <div className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] backdrop-blur-xl shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-xl space-y-6">
               {/* Ready for backend integration notice */}
-              <div className="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-start gap-3">
-                <Sparkles className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-xl bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-start gap-3">
+                <Sparkles className="w-4 h-4 text-[#FF8A00] shrink-0 mt-0.5" />
                 <div className="text-xs text-zinc-300 leading-relaxed">
-                  <span className="font-semibold text-indigo-300">Frontend UI Notice: </span>
+                  <span className="font-semibold text-[#FFB020]">Frontend UI Notice: </span>
                   This contact form is fully styled and structured for future integration with services such as EmailJS, Resend, or API routes. You can also write to me directly at{" "}
                   <a
                     href={`mailto:${CONTACT_INFO.email}`}
-                    className="underline text-indigo-300 hover:text-white"
+                    className="underline text-[#FFB020] hover:text-white"
                   >
                     {CONTACT_INFO.email}
                   </a>.
@@ -353,7 +353,7 @@ export default function Contact() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="p-6 sm:p-8 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 text-center space-y-4"
+                    className="p-6 sm:p-8 rounded-2xl bg-[#191C20] border border-[#292D32] text-center space-y-4"
                   >
                     <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto">
                       <CheckCircle2 className="w-6 h-6" />
@@ -364,19 +364,19 @@ export default function Contact() {
                         Message Preview Ready!
                       </h3>
                       <p className="text-xs sm:text-sm text-zinc-300 max-w-md mx-auto">
-                        Thank you, <span className="font-semibold text-indigo-300">{submittedData.name}</span>.
-                        Your message for <span className="text-indigo-300 font-mono text-xs">[{submittedData.inquiryType}]</span> has been prepared.
+                        Thank you, <span className="font-semibold text-[#FFB020]">{submittedData.name}</span>.
+                        Your message for <span className="text-[#FFB020] font-mono text-xs">[{submittedData.inquiryType}]</span> has been prepared.
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-black/40 border border-white/5 text-left text-xs space-y-2 max-w-md mx-auto">
+                    <div className="p-4 rounded-xl bg-[#0B0D0F] border border-[#292D32] text-left text-xs space-y-2 max-w-md mx-auto">
                       <p className="text-zinc-400">
                         <span className="text-zinc-500 font-mono">From:</span> {submittedData.name} ({submittedData.email})
                       </p>
                       <p className="text-zinc-400">
                         <span className="text-zinc-500 font-mono">Topic:</span> {submittedData.inquiryType}
                       </p>
-                      <p className="text-zinc-300 pt-1 border-t border-white/5 italic">
+                      <p className="text-zinc-300 pt-1 border-t border-[#292D32] italic">
                         &quot;{submittedData.message}&quot;
                       </p>
                     </div>
@@ -388,7 +388,7 @@ export default function Contact() {
                         )}&body=${encodeURIComponent(
                           `Hi Sandesh,\n\nName: ${submittedData.name}\nEmail: ${submittedData.email}\nTopic: ${submittedData.inquiryType}\n\nMessage:\n${submittedData.message}`
                         )}`}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                       >
                         <Send className="w-4 h-4" />
                         <span>Send Now via Email Client</span>
@@ -397,7 +397,7 @@ export default function Contact() {
                       <button
                         type="button"
                         onClick={handleResetForm}
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>Write Another Message</span>
@@ -430,7 +430,7 @@ export default function Contact() {
                           htmlFor="contact-name"
                           className="block text-xs font-mono font-medium uppercase tracking-wider text-zinc-400"
                         >
-                          Your Name <span className="text-indigo-400">*</span>
+                          Your Name <span className="text-[#FF8A00]">*</span>
                         </label>
                         <input
                           id="contact-name"
@@ -440,7 +440,7 @@ export default function Contact() {
                           value={formState.name}
                           onChange={handleInputChange}
                           placeholder="e.g. Alex Johnson"
-                          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.1] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 focus:bg-white/[0.05] transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all"
                         />
                       </div>
 
@@ -450,7 +450,7 @@ export default function Contact() {
                           htmlFor="contact-email"
                           className="block text-xs font-mono font-medium uppercase tracking-wider text-zinc-400"
                         >
-                          Your Email <span className="text-indigo-400">*</span>
+                          Your Email <span className="text-[#FF8A00]">*</span>
                         </label>
                         <input
                           id="contact-email"
@@ -460,7 +460,7 @@ export default function Contact() {
                           value={formState.email}
                           onChange={handleInputChange}
                           placeholder="e.g. alex@company.com"
-                          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.1] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 focus:bg-white/[0.05] transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all"
                         />
                       </div>
                     </div>
@@ -478,10 +478,10 @@ export default function Contact() {
                         name="inquiryType"
                         value={formState.inquiryType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl bg-[#0e1017] border border-white/[0.1] text-sm text-white focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all cursor-pointer"
                       >
                         {INQUIRY_TYPES.map((type) => (
-                          <option key={type} value={type} className="bg-zinc-900 text-white">
+                          <option key={type} value={type} className="bg-[#15181B] text-white">
                             {type}
                           </option>
                         ))}
@@ -494,7 +494,7 @@ export default function Contact() {
                         htmlFor="contact-message"
                         className="block text-xs font-mono font-medium uppercase tracking-wider text-zinc-400"
                       >
-                        Your Message <span className="text-indigo-400">*</span>
+                        Your Message <span className="text-[#FF8A00]">*</span>
                       </label>
                       <textarea
                         id="contact-message"
@@ -504,7 +504,7 @@ export default function Contact() {
                         value={formState.message}
                         onChange={handleInputChange}
                         placeholder="Share a brief overview of your project, timeline, or inquiry..."
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.1] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 focus:bg-white/[0.05] transition-all resize-y min-h-[110px]"
+                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all resize-y min-h-[110px]"
                       />
                     </div>
 
@@ -513,11 +513,11 @@ export default function Contact() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-[0_0_20px_rgba(99,102,241,0.35)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all duration-200 active:scale-95 border border-indigo-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:opacity-60 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all duration-200 active:scale-95 border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] disabled:opacity-60 cursor-pointer"
                       >
                         {isSubmitting ? (
                           <>
-                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <span className="w-4 h-4 border-2 border-[#0B0D0F]/30 border-t-[#0B0D0F] rounded-full animate-spin" />
                             <span>Preparing Message...</span>
                           </>
                         ) : (

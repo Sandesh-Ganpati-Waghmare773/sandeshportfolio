@@ -116,7 +116,7 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
       );
     case "Kotlin":
       return (
-        <span className="font-mono font-bold text-xs text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20">
+        <span className="font-mono font-bold text-xs text-[#FFB020] bg-[#FF8A00]/10 px-1.5 py-0.5 rounded border border-[#FF8A00]/20">
           KOTLIN
         </span>
       );
@@ -168,20 +168,20 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
       );
     case "FramerMotion":
       return (
-        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-violet-400`}>
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-[#FF8A00]`}>
           <path d="M4 2h16v8h-8zM4 10h8l8 8H4zM4 18h8v6z" />
         </svg>
       );
     case "Smartphone":
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-purple-400`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-[#FFB020]`}>
           <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
           <path d="M12 18h.01" />
         </svg>
       );
     case "Cloud":
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-indigo-400`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-[#FF8A00]`}>
           <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
         </svg>
       );
@@ -208,15 +208,15 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
 function CategoryHeaderIcon({ icon }: { icon: string }) {
   switch (icon) {
     case "Code2":
-      return <Code2 className="w-5 h-5 text-indigo-400" />;
+      return <Code2 className="w-5 h-5 text-[#FF8A00]" />;
     case "Layout":
-      return <Layout className="w-5 h-5 text-purple-400" />;
+      return <Layout className="w-5 h-5 text-[#FFB020]" />;
     case "Wrench":
-      return <Wrench className="w-5 h-5 text-cyan-400" />;
+      return <Wrench className="w-5 h-5 text-[#FF8A00]" />;
     case "Cpu":
-      return <Cpu className="w-5 h-5 text-emerald-400" />;
+      return <Cpu className="w-5 h-5 text-[#FFB020]" />;
     default:
-      return <Sparkles className="w-5 h-5 text-indigo-400" />;
+      return <Sparkles className="w-5 h-5 text-[#FF8A00]" />;
   }
 }
 
@@ -270,8 +270,8 @@ export default function Skills() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-purple-600/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-indigo-600/5 blur-[140px] rounded-full" />
+        <div className="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
+        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-amber-600/5 blur-[140px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">
@@ -285,13 +285,13 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
-            <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
+            <Cpu className="w-3.5 h-3.5 text-[#FF8A00]" />
             <span>02 &bull; TECHNICAL ARSENAL</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Skills &amp;{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent">
               Technologies
             </span>
           </h2>
@@ -308,7 +308,7 @@ export default function Skills() {
           <nav
             role="tablist"
             aria-label="Skill Categories Filter"
-            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-inner max-w-full"
+            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-inner max-w-full"
           >
             {filterTabs.map((tab) => {
               const isActive = selectedCategory === tab.id;
@@ -319,14 +319,14 @@ export default function Skills() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
                     isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="active-skills-tab"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-blue-500/10 border border-indigo-400/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+                      className="absolute inset-0 rounded-xl bg-[#191C20] border border-[#292D32] shadow-[0_0_12px_rgba(255,138,0,0.15)]"
                       transition={
                         shouldReduceMotion
                           ? { duration: 0 }
@@ -357,9 +357,9 @@ export default function Skills() {
                 className="space-y-6"
               >
                 {/* Category Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/[0.06]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#292D32]">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shadow-sm">
+                    <div className="w-9 h-9 rounded-xl bg-[#15181B] border border-[#292D32] flex items-center justify-center shadow-sm">
                       <CategoryHeaderIcon icon={category.icon} />
                     </div>
                     <div>
@@ -393,24 +393,24 @@ export default function Skills() {
                           ? {}
                           : { y: -4, transition: { duration: 0.2 } }
                       }
-                      className="group relative p-5 rounded-2xl bg-gradient-to-b from-white/[0.04] via-white/[0.02] to-transparent border border-white/[0.08] hover:border-indigo-400/40 hover:bg-white/[0.06] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.5),0_0_20px_rgba(99,102,241,0.15)]"
+                      className="group relative p-5 rounded-2xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.6),0_0_15px_rgba(255,138,0,0.12)]"
                     >
                       <div className="space-y-3">
                         {/* Top row: Icon & Proficiency Label */}
                         <div className="flex items-center justify-between gap-2">
-                          <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-zinc-200 group-hover:border-indigo-400/50 group-hover:scale-105 transition-all duration-200">
+                          <div className="w-10 h-10 rounded-xl bg-[#191C20] border border-[#292D32] flex items-center justify-center text-zinc-200 group-hover:border-[#FF8A00]/50 group-hover:scale-105 transition-all duration-200">
                             <SkillTechIcon icon={skill.icon} />
                           </div>
                           {/* Proficiency Badge (NO fake percentages) */}
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                            <CheckCircle className="w-3 h-3 text-indigo-400" />
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#FF8A00]/10 text-[#FFB020] border border-[#FF8A00]/20">
+                            <CheckCircle className="w-3 h-3 text-[#FF8A00]" />
                             <span>{skill.level}</span>
                           </span>
                         </div>
 
                         {/* Skill Name */}
                         <div>
-                          <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-200 transition-colors">
+                          <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-[#FFB020] transition-colors">
                             {skill.name}
                           </h4>
                           {skill.badge && (
@@ -429,7 +429,7 @@ export default function Skills() {
                       {/* Bottom Subtle Indicator */}
                       <div className="mt-4 pt-3 border-t border-white/[0.04] flex items-center justify-between text-[11px] font-mono text-zinc-500">
                         <span>Application Focus</span>
-                        <span className="text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                        <span className="text-[#FF8A00] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
                           <Sparkles className="w-3 h-3" />
                           <span>Active</span>
                         </span>

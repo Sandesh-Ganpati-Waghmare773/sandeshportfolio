@@ -27,8 +27,8 @@ export const SERVICES: readonly ServiceItem[] = [
       "SEO-friendly metadata and structured layout",
     ],
     technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "HTML5/CSS3"],
-    gradient: "from-blue-500/15 via-indigo-500/10 to-transparent",
-    accentBorder: "group-hover:border-blue-500/40",
+    gradient: "from-[#FF8A00]/10 via-[#FFB020]/5 to-transparent",
+    accentBorder: "group-hover:border-[#FF8A00]/40",
   },
   {
     id: "app-dev",
@@ -45,8 +45,8 @@ export const SERVICES: readonly ServiceItem[] = [
       "Native performance optimization and store-ready builds",
     ],
     technologies: ["Flutter", "Dart", "Kotlin", "Swift", "React Native"],
-    gradient: "from-cyan-500/15 via-blue-500/10 to-transparent",
-    accentBorder: "group-hover:border-cyan-500/40",
+    gradient: "from-[#FF8A00]/10 via-[#FFB020]/5 to-transparent",
+    accentBorder: "group-hover:border-[#FF8A00]/40",
   },
   {
     id: "wordpress-website-dev",
@@ -63,8 +63,8 @@ export const SERVICES: readonly ServiceItem[] = [
       "Responsive mobile-first design and easy CMS management",
     ],
     technologies: ["WordPress", "PHP", "Custom Themes", "Elementor/Gutenberg", "SEO"],
-    gradient: "from-sky-500/15 via-indigo-500/10 to-transparent",
-    accentBorder: "group-hover:border-sky-500/40",
+    gradient: "from-[#FF8A00]/10 via-[#FFB020]/5 to-transparent",
+    accentBorder: "group-hover:border-[#FF8A00]/40",
   },
   {
     id: "ai-agent-dev",
@@ -81,8 +81,8 @@ export const SERVICES: readonly ServiceItem[] = [
       "Chatbot interfaces, conversational UX & webhook triggers",
     ],
     technologies: ["Python", "Gemini API", "OpenAI API", "LangChain", "Node.js"],
-    gradient: "from-violet-500/15 via-purple-500/10 to-transparent",
-    accentBorder: "group-hover:border-violet-500/40",
+    gradient: "from-[#FF8A00]/10 via-[#FFB020]/5 to-transparent",
+    accentBorder: "group-hover:border-[#FF8A00]/40",
   },
   {
     id: "google-business-dev",
@@ -99,7 +99,7 @@ export const SERVICES: readonly ServiceItem[] = [
       "Review management strategy & customer inquiry optimization",
     ],
     technologies: ["Google Business Profile", "Google Maps", "Local SEO", "Citations", "Analytics"],
-    gradient: "from-amber-500/15 via-emerald-500/10 to-transparent",
-    accentBorder: "group-hover:border-amber-500/40",
+    gradient: "from-[#FF8A00]/10 via-[#FFB020]/5 to-transparent",
+    accentBorder: "group-hover:border-[#FF8A00]/40",
   },
 ] as const;

@@ -121,14 +121,14 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
 
-        {/* Ambient Top Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/10 blur-[130px] rounded-full" />
+        {/* Ambient Top Glow - Restrained Warm Amber */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#FF8A00]/5 blur-[140px] rounded-full" />
         {/* Ambient Right Orb */}
-        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-purple-600/10 blur-[140px] rounded-full" />
+        <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-amber-600/5 blur-[150px] rounded-full" />
         {/* Ambient Left Orb */}
-        <div className="absolute bottom-1/4 left-10 w-[350px] h-[350px] bg-blue-600/10 blur-[130px] rounded-full" />
+        <div className="absolute bottom-1/4 left-10 w-[300px] h-[300px] bg-orange-600/5 blur-[140px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full">
@@ -144,8 +144,8 @@ export default function Hero() {
               animate="visible"
               className="flex justify-center lg:justify-start"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md shadow-[0_0_15px_rgba(99,102,241,0.15)]">
-                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md shadow-[0_0_15px_rgba(255,138,0,0.1)]">
+                <span className="w-2 h-2 rounded-full bg-[#FF8A00] animate-pulse" />
                 <span>HELLO, I&apos;M</span>
               </div>
             </motion.div>
@@ -158,7 +158,7 @@ export default function Hero() {
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
                 SANDESH{" "}
-                <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(129,140,248,0.25)]">
+                <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,138,0,0.2)]">
                   WAGHMARE
                 </span>
               </h1>
@@ -172,7 +172,7 @@ export default function Hero() {
             >
               <div className="inline-block">
                 <p className="text-lg sm:text-xl md:text-2xl font-semibold text-zinc-300 flex items-center justify-center lg:justify-start gap-2.5">
-                  <Sparkles className="w-5 h-5 text-indigo-400 hidden sm:inline-block shrink-0" />
+                  <Sparkles className="w-5 h-5 text-[#FF8A00] hidden sm:inline-block shrink-0" />
                   <span className="bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
                     Computer Engineering Student &amp; Developer
                   </span>
@@ -207,19 +207,19 @@ export default function Hero() {
                 <a
                   href="#projects"
                   onClick={(e) => handleScrollTo(e, "projects")}
-                  className="group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-[0_0_25px_rgba(99,102,241,0.35)] hover:shadow-[0_0_35px_rgba(99,102,241,0.55)] transition-all duration-200 active:scale-95 border border-indigo-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all duration-200 active:scale-95 border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                 >
                   <span>Explore My Work</span>
-                  <ArrowRight className="w-4 h-4 text-indigo-100 transition-transform duration-200 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 text-[#0B0D0F] transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
 
                 {/* Button 2: Let's Connect -> #contact */}
                 <a
                   href="#contact"
                   onClick={(e) => handleScrollTo(e, "contact")}
-                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.12] hover:border-white/[0.22] backdrop-blur-md shadow-sm transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-zinc-200 hover:text-white bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#3F444D] backdrop-blur-md shadow-sm transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                 >
-                  <Send className="w-4 h-4 text-indigo-400 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <Send className="w-4 h-4 text-[#FF8A00] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   <span>Let&apos;s Connect</span>
                 </a>
               </div>
@@ -240,14 +240,14 @@ export default function Hero() {
                         : {})}
                       aria-label={social.ariaLabel}
                       title={social.ariaLabel}
-                      className="group relative p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 text-zinc-400 hover:text-white transition-all duration-200 hover:shadow-[0_0_15px_rgba(99,102,241,0.25)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                      className="group relative p-2.5 rounded-xl bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-400 hover:text-white transition-all duration-200 hover:shadow-[0_0_15px_rgba(255,138,0,0.2)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                     >
                       <SocialIcon
                         icon={social.icon}
                         className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:scale-110"
                       />
                       {/* Tooltip on hover */}
-                      <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-[10px] font-medium bg-zinc-900 border border-white/10 text-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">
+                      <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-[10px] font-medium bg-[#15181B] border border-[#292D32] text-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">
                         {social.name}
                       </span>
                     </a>

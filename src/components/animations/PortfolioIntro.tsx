@@ -377,7 +377,7 @@ export default function PortfolioIntro() {
       role="dialog"
       aria-modal="true"
       aria-label="Welcome Intro"
-      className="fixed inset-0 z-[100] w-full h-[100dvh] bg-[#08090d] text-zinc-100 flex items-center justify-center overflow-hidden select-none"
+      className="fixed inset-0 z-[100] w-full h-[100dvh] bg-[#0B0D0F] text-zinc-100 flex items-center justify-center overflow-hidden select-none"
     >
       {/* Interactive Canvas Particles */}
       <IntroParticlesCanvas
@@ -400,7 +400,7 @@ export default function PortfolioIntro() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center"
       >
-        <div className="w-[500px] sm:w-[700px] h-[350px] sm:h-[500px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/20 to-cyan-500/15 blur-[140px] rounded-full" />
+        <div className="w-[500px] sm:w-[700px] h-[350px] sm:h-[500px] bg-gradient-to-tr from-[#FF8A00]/15 via-amber-600/15 to-orange-500/10 blur-[140px] rounded-full" />
       </div>
 
       {/* Top Right: Accessible Skip Intro Button */}
@@ -409,10 +409,10 @@ export default function PortfolioIntro() {
           type="button"
           onClick={handleSkip}
           aria-label="Skip cinematic intro and go directly to portfolio"
-          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono tracking-wider text-zinc-300 hover:text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.12] hover:border-indigo-400/50 backdrop-blur-md shadow-lg transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer"
+          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono tracking-wider text-zinc-300 hover:text-white bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 backdrop-blur-md shadow-lg transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer"
         >
           <span>Skip Intro</span>
-          <span className="text-[10px] text-zinc-500 group-hover:text-indigo-300 transition-colors hidden sm:inline">
+          <span className="text-[10px] text-zinc-500 group-hover:text-[#FFB020] transition-colors hidden sm:inline">
             [ESC]
           </span>
         </button>
@@ -428,11 +428,11 @@ export default function PortfolioIntro() {
           style={{ opacity: 0, visibility: "hidden" }}
           className="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs sm:text-sm font-mono tracking-[0.25em] uppercase backdrop-blur-md shadow-[0_0_20px_rgba(99,102,241,0.2)]">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-[0.25em] uppercase backdrop-blur-md shadow-[0_0_20px_rgba(255,138,0,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-[#FF8A00] animate-ping" />
             <span>PORTFOLIO EXPERIENCE</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(99,102,241,0.4)]">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-zinc-100 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,138,0,0.3)]">
             WELCOME
           </h2>
         </div>
@@ -445,10 +445,10 @@ export default function PortfolioIntro() {
           style={{ opacity: 0, visibility: "hidden" }}
           className="absolute inset-0 flex flex-col items-center justify-center space-y-3 pointer-events-none"
         >
-          <p className="text-sm sm:text-lg md:text-xl font-mono tracking-[0.32em] text-indigo-300/90 uppercase font-semibold">
+          <p className="text-sm sm:text-lg md:text-xl font-mono tracking-[0.32em] text-[#FFB020]/90 uppercase font-semibold">
             WELCOME TO MY
           </p>
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(99,102,241,0.4)]">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-zinc-100 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,138,0,0.3)]">
             DIGITAL WORLD
           </h2>
         </div>
@@ -464,7 +464,7 @@ export default function PortfolioIntro() {
           <div
             ref={stage3BadgeRef}
             style={{ opacity: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-xs sm:text-sm font-mono tracking-widest uppercase shadow-[0_0_25px_rgba(99,102,241,0.3)] backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase shadow-[0_0_25px_rgba(255,138,0,0.2)] backdrop-blur-md"
           >
             <div className="relative w-4 h-4 sm:w-5 sm:h-5 shrink-0">
               <Image
@@ -472,7 +472,7 @@ export default function PortfolioIntro() {
                 alt="SW Logo"
                 width={20}
                 height={20}
-                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(99,102,241,0.8)]"
+                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,138,0,0.6)]"
               />
             </div>
             <span>HELLO, I&apos;M</span>
@@ -484,7 +484,7 @@ export default function PortfolioIntro() {
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight text-white leading-[1.05]"
           >
             SANDESH{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_55px_rgba(129,140,248,0.55)]">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(255,138,0,0.4)]">
               WAGHMARE
             </span>
           </h1>
@@ -496,12 +496,12 @@ export default function PortfolioIntro() {
           >
             <p className="text-xs sm:text-sm md:text-base font-mono tracking-[0.26em] text-zinc-300 uppercase flex items-center justify-center flex-wrap gap-x-2 gap-y-1">
               <span>DEVELOPER</span>
-              <span className="text-indigo-400 font-bold">•</span>
+              <span className="text-[#FF8A00] font-bold">•</span>
               <span>CREATOR</span>
-              <span className="text-purple-400 font-bold">•</span>
+              <span className="text-[#FF8A00] font-bold">•</span>
               <span>PROBLEM SOLVER</span>
             </p>
-            <div className="w-28 sm:w-40 h-[2px] mx-auto bg-gradient-to-r from-transparent via-indigo-400 to-transparent shadow-[0_0_12px_rgba(129,140,248,0.7)]" />
+            <div className="w-28 sm:w-40 h-[2px] mx-auto bg-gradient-to-r from-transparent via-[#FF8A00] to-transparent shadow-[0_0_12px_rgba(255,138,0,0.5)]" />
           </div>
         </div>
       </div>
@@ -511,7 +511,7 @@ export default function PortfolioIntro() {
         aria-hidden="true"
         className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-32 sm:w-44 h-[2px] bg-white/[0.08] rounded-full overflow-hidden pointer-events-none"
       >
-        <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 w-full animate-[pulse_2s_ease-in-out_infinite]" />
+        <div className="h-full bg-gradient-to-r from-[#FF8A00] to-[#FFB020] w-full animate-[pulse_2s_ease-in-out_infinite]" />
       </div>
     </div>
   );

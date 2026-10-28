@@ -75,8 +75,8 @@ export default function Projects() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-indigo-600/5 blur-[150px] rounded-full" />
-        <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-purple-600/5 blur-[150px] rounded-full" />
+        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[150px] rounded-full" />
+        <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[150px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">
@@ -90,13 +90,13 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
-            <FolderGit2 className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs sm:text-sm font-mono tracking-widest uppercase backdrop-blur-md">
+            <FolderGit2 className="w-3.5 h-3.5 text-[#FF8A00]" />
             <span>03 &bull; CRAFTED WORK</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Featured{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8A00] via-[#FFB020] to-[#FF9F1C] bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
@@ -113,7 +113,7 @@ export default function Projects() {
           <nav
             role="tablist"
             aria-label="Project Category Filter"
-            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-inner max-w-full"
+            className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-inner max-w-full"
           >
             {filterTabs.map((tab) => {
               const isActive = activeFilter === tab.id;
@@ -124,7 +124,7 @@ export default function Projects() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
                     isActive
                       ? "text-white"
                       : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
@@ -133,7 +133,7 @@ export default function Projects() {
                   {isActive && (
                     <motion.div
                       layoutId="active-project-filter"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-blue-500/10 border border-indigo-400/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+                      className="absolute inset-0 rounded-xl bg-[#191C20] border border-[#292D32] shadow-[0_0_12px_rgba(255,138,0,0.15)]"
                       transition={
                         shouldReduceMotion
                           ? { duration: 0 }
@@ -157,9 +157,9 @@ export default function Projects() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="flex flex-col items-center justify-center p-12 sm:p-16 rounded-3xl bg-white/[0.02] border border-white/[0.06] text-center max-w-xl mx-auto space-y-4 shadow-inner"
+            className="flex flex-col items-center justify-center p-12 sm:p-16 rounded-3xl bg-[#15181B] border border-[#292D32] text-center max-w-xl mx-auto space-y-4 shadow-inner"
           >
-            <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+            <div className="w-14 h-14 rounded-2xl bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-center justify-center text-[#FF8A00]">
               <FolderGit2 className="w-7 h-7" />
             </div>
             <div className="space-y-1.5">
@@ -170,8 +170,8 @@ export default function Projects() {
                 Selected projects, live applications, and client showcases for this category will be featured here shortly.
               </p>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-400">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191C20] border border-[#292D32] text-xs font-mono text-zinc-400">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF8A00]" />
               <span>Section Under Active Preparation</span>
             </div>
           </motion.div>
@@ -193,11 +193,11 @@ export default function Projects() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.35 }}
-                  className="group relative rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.6),0_0_30px_rgba(99,102,241,0.15)]"
+                  className="group relative rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.7),0_0_20px_rgba(255,138,0,0.15)]"
                 >
                   <div>
                     {/* Project Image Banner */}
-                    <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#0a0b12] border-b border-white/[0.06]">
+                    <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#101214] border-b border-[#292D32]">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -207,12 +207,12 @@ export default function Projects() {
                       />
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent opacity-80"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0D0F] via-transparent to-transparent opacity-80"
                       />
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                        <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-300 bg-[#08090d]/80 border border-white/10 px-2.5 py-1 rounded-full backdrop-blur-md">
+                        <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-300 bg-[#0B0D0F]/80 border border-[#292D32] px-2.5 py-1 rounded-full backdrop-blur-md">
                           {project.category}
                         </span>
                         {project.featured && (
@@ -227,10 +227,10 @@ export default function Projects() {
                     {/* Content Body */}
                     <div className="p-6 sm:p-7 space-y-4">
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-200 transition-colors">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#FFB020] transition-colors">
                           {project.title}
                         </h3>
-                        <p className="text-xs sm:text-sm font-medium text-indigo-400 mt-0.5">
+                        <p className="text-xs sm:text-sm font-medium text-[#FF8A00] mt-0.5">
                           {project.tagline}
                         </p>
                       </div>
@@ -244,7 +244,7 @@ export default function Projects() {
                         {project.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-white/[0.04] border border-white/[0.08] text-zinc-300"
+                            className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-[#191C20] border border-[#292D32] text-zinc-300"
                           >
                             {tech}
                           </span>
@@ -254,14 +254,14 @@ export default function Projects() {
                   </div>
 
                   {/* Footer Action Links */}
-                  <div className="p-6 sm:p-7 pt-0 flex items-center justify-between gap-3 border-t border-white/[0.04] mt-4">
+                  <div className="p-6 sm:p-7 pt-0 flex items-center justify-between gap-3 border-t border-[#292D32] mt-4">
                     {/* GitHub Repo Link */}
                     {project.githubUrl ? (
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white bg-[#191C20] hover:bg-[#292D32] border border-[#292D32] hover:border-[#3F444D] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                         aria-label={`View ${project.title} source code on GitHub`}
                       >
                         <GithubIcon className="w-4 h-4" />
@@ -279,11 +279,11 @@ export default function Projects() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 border border-indigo-400/30 shadow-[0_0_15px_rgba(99,102,241,0.25)] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] border border-[#FFB020]/40 shadow-[0_0_15px_rgba(255,138,0,0.25)] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
                         aria-label={`Open live demonstration of ${project.title}`}
                       >
                         <span>Live Demo</span>
-                        <ArrowUpRight className="w-4 h-4 text-indigo-200" />
+                        <ArrowUpRight className="w-4 h-4 text-[#0B0D0F]" />
                       </a>
                     ) : (
                       <span className="text-xs font-mono text-zinc-500 italic">

@@ -25,7 +25,7 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
     summary:
       "I'm Sandesh Waghmare, a developer and undergraduate engineer who loves turning complex challenges into clean, accessible digital experiences with intuitive design.",
     icon: "User",
-    accent: "from-blue-500/20 to-indigo-500/20 border-blue-500/30",
+    accent: "from-[#FF8A00]/15 to-[#FFB020]/10 border-[#FF8A00]/30",
   },
   {
     id: "engineering",
@@ -34,7 +34,7 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
     summary:
       "Pursuing my Bachelor of Engineering in Computer Engineering. Grounded in computational theory, data structures, algorithms, and systems design principles.",
     icon: "GraduationCap",
-    accent: "from-indigo-500/20 to-purple-500/20 border-indigo-500/30",
+    accent: "from-[#FF8A00]/15 to-[#FFB020]/10 border-[#FF8A00]/30",
   },
   {
     id: "craft",
@@ -43,7 +43,7 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
     summary:
       "Fascinated by modern frontend ecosystems and responsive design architectures. I focus on creating fast, interactive, and aesthetic web interfaces that feel alive.",
     icon: "Code2",
-    accent: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+    accent: "from-[#FF8A00]/15 to-[#FFB020]/10 border-[#FF8A00]/30",
   },
   {
     id: "impact",
@@ -52,7 +52,7 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
     summary:
       "Technology is most meaningful when it solves actual problems. I strive to build practical tools, usable workflows, and interactive applications that genuinely benefit people.",
     icon: "Rocket",
-    accent: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+    accent: "from-[#FF8A00]/15 to-[#FFB020]/10 border-[#FF8A00]/30",
   },
   {
     id: "growth",
@@ -61,7 +61,7 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
     summary:
       "Engineering is a lifelong journey. I continuously explore modern tools, refine my algorithmic thinking, study clean code patterns, and turn learnings into tangible projects.",
     icon: "Flame",
-    accent: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+    accent: "from-[#FF8A00]/15 to-[#FFB020]/10 border-[#FF8A00]/30",
   },
 ] as const;
 
