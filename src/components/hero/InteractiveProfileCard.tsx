@@ -182,8 +182,14 @@ export default function InteractiveProfileCard({
           ) : (
             /* Fallback Clean Avatar Graphic if no image path provided */
             <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-indigo-950/40 via-[#0d0e17] to-purple-950/30 text-center">
-              <div className="w-24 h-24 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4 shadow-[0_0_25px_rgba(99,102,241,0.3)]">
-                <Terminal className="w-10 h-10" />
+              <div className="w-24 h-24 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center p-3 text-indigo-400 mb-4 shadow-[0_0_25px_rgba(99,102,241,0.3)]">
+                <Image
+                  src="/images/logo-icon.png"
+                  alt="Sandesh Waghmare"
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-contain filter drop-shadow-[0_4px_12px_rgba(99,102,241,0.6)]"
+                />
               </div>
               <h3 className="text-lg font-bold text-white tracking-wide">
                 SANDESH WAGHMARE

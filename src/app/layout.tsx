@@ -56,15 +56,30 @@ export const metadata: Metadata = {
     siteName: "Sandesh Waghmare Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/logo-full.png",
+        width: 805,
+        height: 553,
+        alt: "Sandesh Waghmare - Software Developer Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sandesh Waghmare | Developer & Computer Engineering Student",
     description:
       "Explore the developer portfolio of Sandesh Waghmare — projects, skills, certificates, and technical web services.",
+    images: ["/images/logo-full.png"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/images/logo-icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+    ],
     shortcut: "/favicon.ico",
   },
 };

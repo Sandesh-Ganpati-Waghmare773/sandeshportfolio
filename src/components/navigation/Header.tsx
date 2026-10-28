@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Code2, ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
+import { ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
 import { NAV_ITEMS, type NavItem } from "@/data/navigation";
 
 export default function Header() {
@@ -159,14 +160,26 @@ export default function Header() {
             className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg p-1 transition-transform active:scale-95"
             aria-label="Sandesh Portfolio Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/25 via-purple-500/20 to-blue-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:border-indigo-400/60 group-hover:text-indigo-300 group-hover:shadow-[0_0_16px_rgba(99,102,241,0.35)] transition-all duration-200">
-              <Code2 className="w-4 h-4" />
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#0c0d16] via-[#101222] to-[#151228] border border-indigo-500/30 flex items-center justify-center p-1.5 shadow-[0_0_18px_rgba(99,102,241,0.25)] group-hover:border-indigo-400/70 group-hover:shadow-[0_0_24px_rgba(99,102,241,0.5)] transition-all duration-300">
+              <Image
+                src="/images/logo-icon.png"
+                alt="Sandesh Waghmare Logo"
+                width={40}
+                height={40}
+                priority
+                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300"
+              />
             </div>
-            <div className="flex items-center gap-1 font-sans">
-              <span className="font-extrabold tracking-wider text-base sm:text-lg text-white group-hover:text-indigo-300 transition-colors">
-                SANDESH
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1 font-sans leading-none">
+                <span className="font-extrabold tracking-wider text-base sm:text-lg text-white group-hover:text-indigo-300 transition-colors">
+                  SANDESH
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+              </div>
+              <span className="text-[9px] font-mono tracking-[0.2em] text-indigo-300/70 uppercase group-hover:text-indigo-200 transition-colors mt-0.5">
+                WAGHMARE
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
             </div>
           </a>
 

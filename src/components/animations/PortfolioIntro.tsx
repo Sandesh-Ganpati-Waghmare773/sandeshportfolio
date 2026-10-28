@@ -8,6 +8,7 @@ import React, {
   useSyncExternalStore,
 } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 import IntroParticlesCanvas from "./IntroParticlesCanvas";
 
 /**
@@ -60,6 +61,7 @@ export default function PortfolioIntro() {
   const stage1Ref = useRef<HTMLDivElement | null>(null);
   const stage2Ref = useRef<HTMLDivElement | null>(null);
   const stage3Ref = useRef<HTMLDivElement | null>(null);
+  const stage3BadgeRef = useRef<HTMLDivElement | null>(null);
   const stage3NameRef = useRef<HTMLHeadingElement | null>(null);
   const stage3SubRef = useRef<HTMLDivElement | null>(null);
   const ambientGlowRef = useRef<HTMLDivElement | null>(null);
@@ -203,6 +205,14 @@ export default function PortfolioIntro() {
       opacity: 0,
       visibility: "hidden",
     });
+    gsap.set(
+      [
+        stage3BadgeRef.current,
+        stage3NameRef.current,
+        stage3SubRef.current,
+      ],
+      { opacity: 0 }
+    );
 
     // -------------------------------------------------------------
     // SEQUENCE 0.0s – 0.6s: Environment boot, dark atmosphere
@@ -220,14 +230,14 @@ export default function PortfolioIntro() {
       {
         opacity: 0,
         y: 24,
+        scale: 0.95,
         filter: "blur(10px)",
-        letterSpacing: "0.38em",
       },
       {
         opacity: 1,
         y: 0,
+        scale: 1,
         filter: "blur(0px)",
-        letterSpacing: "0.26em",
         duration: 0.85,
         ease: "power2.out",
       }
@@ -236,7 +246,7 @@ export default function PortfolioIntro() {
     tl.to({}, { duration: 0.75 });
 
     // -------------------------------------------------------------
-    // SEQUENCE 2: Transform into "WELCOME TO MY DIGITAL SPACE" & Hold
+    // SEQUENCE 2: Transform into "WELCOME TO MY DIGITAL WORLD" & Hold
     // -------------------------------------------------------------
     tl.to(
       stage1Ref.current,
@@ -270,11 +280,11 @@ export default function PortfolioIntro() {
       },
       "<0.05"
     );
-    // Hold so visitor reads "WELCOME TO MY DIGITAL SPACE"
+    // Hold so visitor reads "WELCOME TO MY DIGITAL WORLD"
     tl.to({}, { duration: 0.8 });
 
     // -------------------------------------------------------------
-    // SEQUENCE 3: End "WELCOME TO MY DIGITAL SPACE" & show "SANDESH WAGHMARE" for 2s
+    // SEQUENCE 3: End "WELCOME TO MY DIGITAL WORLD" & show "SANDESH WAGHMARE" for 2s
     // -------------------------------------------------------------
     tl.to(
       stage2Ref.current,
@@ -288,8 +298,24 @@ export default function PortfolioIntro() {
     );
     tl.call(() => {
       gsap.set(stage2Ref.current, { visibility: "hidden" });
-      gsap.set(stage3Ref.current, { visibility: "visible" });
+      gsap.set(stage3Ref.current, { opacity: 1, visibility: "visible" });
     });
+    tl.fromTo(
+      stage3BadgeRef.current,
+      {
+        opacity: 0,
+        y: 15,
+        scale: 0.92,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "<0.05"
+    );
     tl.fromTo(
       stage3NameRef.current,
       {
@@ -306,7 +332,7 @@ export default function PortfolioIntro() {
         duration: 0.6,
         ease: "back.out(1.15)",
       },
-      "<0.05"
+      "<0.08"
     );
 
     // Reveal Subtitle synchronously
@@ -399,29 +425,31 @@ export default function PortfolioIntro() {
         {/* ============================================================ */}
         <div
           ref={stage1Ref}
+          style={{ opacity: 0, visibility: "hidden" }}
           className="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs sm:text-sm font-mono tracking-[0.25em] uppercase backdrop-blur-md shadow-[0_0_20px_rgba(99,102,241,0.2)]">
             <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping" />
             <span>PORTFOLIO EXPERIENCE</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extralight tracking-[0.25em] sm:tracking-[0.32em] text-white uppercase drop-shadow-[0_0_40px_rgba(255,255,255,0.35)]">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(99,102,241,0.4)]">
             WELCOME
           </h2>
         </div>
 
         {/* ============================================================ */}
-        {/* STAGE 2: "WELCOME TO MY DIGITAL SPACE"                       */}
+        {/* STAGE 2: "WELCOME TO MY DIGITAL WORLD"                       */}
         {/* ============================================================ */}
         <div
           ref={stage2Ref}
+          style={{ opacity: 0, visibility: "hidden" }}
           className="absolute inset-0 flex flex-col items-center justify-center space-y-3 pointer-events-none"
         >
           <p className="text-sm sm:text-lg md:text-xl font-mono tracking-[0.32em] text-indigo-300/90 uppercase font-semibold">
             WELCOME TO MY
           </p>
           <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(99,102,241,0.4)]">
-            DIGITAL SPACE
+            DIGITAL WORLD
           </h2>
         </div>
 
@@ -430,15 +458,29 @@ export default function PortfolioIntro() {
         {/* ============================================================ */}
         <div
           ref={stage3Ref}
+          style={{ opacity: 0, visibility: "hidden" }}
           className="relative flex flex-col items-center justify-center space-y-4 sm:space-y-5 pointer-events-none"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-xs sm:text-sm font-mono tracking-widest uppercase shadow-[0_0_25px_rgba(99,102,241,0.3)] backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+          <div
+            ref={stage3BadgeRef}
+            style={{ opacity: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-xs sm:text-sm font-mono tracking-widest uppercase shadow-[0_0_25px_rgba(99,102,241,0.3)] backdrop-blur-md"
+          >
+            <div className="relative w-4 h-4 sm:w-5 sm:h-5 shrink-0">
+              <Image
+                src="/images/logo-icon.png"
+                alt="SW Logo"
+                width={20}
+                height={20}
+                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(99,102,241,0.8)]"
+              />
+            </div>
             <span>HELLO, I&apos;M</span>
           </div>
 
           <h1
             ref={stage3NameRef}
+            style={{ opacity: 0 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight text-white leading-[1.05]"
           >
             SANDESH{" "}
@@ -447,7 +489,11 @@ export default function PortfolioIntro() {
             </span>
           </h1>
 
-          <div ref={stage3SubRef} className="space-y-2 pt-1">
+          <div
+            ref={stage3SubRef}
+            style={{ opacity: 0 }}
+            className="space-y-2 pt-1"
+          >
             <p className="text-xs sm:text-sm md:text-base font-mono tracking-[0.26em] text-zinc-300 uppercase flex items-center justify-center flex-wrap gap-x-2 gap-y-1">
               <span>DEVELOPER</span>
               <span className="text-indigo-400 font-bold">•</span>

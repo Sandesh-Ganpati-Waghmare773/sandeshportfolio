@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import {
-  Code2,
   ArrowUp,
 } from "lucide-react";
 import { NAV_ITEMS, type NavItem } from "@/data/navigation";
@@ -60,8 +60,14 @@ export default function Footer() {
               className="group inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg p-1 transition-transform active:scale-95"
               aria-label="Back to Top - Sandesh Waghmare"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/25 via-purple-500/20 to-blue-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:border-indigo-400/60 group-hover:text-indigo-300 transition-colors">
-                <Code2 className="w-4 h-4" />
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#0c0d16] via-[#101222] to-[#151228] border border-indigo-500/30 flex items-center justify-center p-1.5 shadow-[0_0_18px_rgba(99,102,241,0.2)] group-hover:border-indigo-400/60 group-hover:shadow-[0_0_22px_rgba(99,102,241,0.4)] transition-all duration-300">
+                <Image
+                  src="/images/logo-icon.png"
+                  alt="Sandesh Waghmare Logo"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
               <div className="flex items-center gap-1 font-sans">
                 <span className="font-extrabold tracking-wider text-base sm:text-lg text-white group-hover:text-indigo-300 transition-colors">
