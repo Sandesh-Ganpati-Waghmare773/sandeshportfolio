@@ -14,7 +14,7 @@ export interface EducationJourneyItem {
   period: string;
   status: string;
   description: string;
-  highlights: string[];
+  highlights?: string[];
 }
 
 export const STORY_PILLARS: readonly StoryPillar[] = [
@@ -67,38 +67,36 @@ export const STORY_PILLARS: readonly StoryPillar[] = [
 
 export const EDUCATION_JOURNEY: readonly EducationJourneyItem[] = [
   {
-    id: "undergrad",
+    id: "engineering",
     degree: "Bachelor of Engineering in Computer Engineering",
     institution: "Pimpri Chinchwad College of Engineering (PCCOE), Pune",
-    period: "2022 – 2026",
-    status: "In Progress",
+    period: "Expected 2029",
+    status: "Expected 2029",
     description:
-      "In-depth studies covering Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Database Management Systems, Computer Networks, and Software Engineering methodologies.",
-    highlights: [
-      "Rigorous CS Fundamentals",
-      "Hands-on Project Development",
-      "Algorithmic Problem Solving",
-    ],
+      "Comprehensive study of computer engineering fundamentals, data structures, algorithms, systems architecture, operating systems, and scalable software design.",
   },
   {
     id: "hsc",
-    degree: "Higher Secondary Certificate (Class XII - Science)",
-    institution: "Junior College Education",
+    degree: "Higher Secondary Certificate (Class XII - Science, PCM)",
+    institution: "Gayatri International College, Charholi, Pune",
     period: "Completed",
-    status: "Distinction",
+    status: "Completed",
     description:
-      "Specialized in Physics, Chemistry, and Higher Mathematics. Built a strong foundational aptitude in logical deduction, quantitative reasoning, and scientific inquiry.",
-    highlights: [
-      "Advanced Mathematics",
-      "Scientific Foundations",
-      "Analytical Thinking",
-    ],
+      "Higher secondary education specializing in Physics, Chemistry, and Mathematics (PCM Group). Developed analytical thinking and foundational science expertise.",
+  },
+  {
+    id: "ssc",
+    degree: "Secondary School Certificate (Class X - SSC Board)",
+    institution: "Shree Ram Madhyamik Vidyalay, Bhosari, Pune - 411039",
+    period: "Completed",
+    status: "Completed",
+    description:
+      "Completed secondary education under Maharashtra State Board (SSC) with strong academic foundations in science, mathematics, and core academic subjects.",
   },
 ] as const;
 
 export const QUICK_STATS = [
   { label: "Academic Focus", value: "Computer Engg." },
-  { label: "Core Stack", value: "Next.js & C++" },
   { label: "Design Style", value: "Modern & Interactive" },
   { label: "Philosophy", value: "Build & Learn Daily" },
 ] as const;

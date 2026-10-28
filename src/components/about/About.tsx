@@ -12,7 +12,6 @@ import {
   Sparkles,
   Calendar,
   MapPin,
-  CheckCircle2,
 } from "lucide-react";
 import {
   STORY_PILLARS,
@@ -114,7 +113,7 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true, margin: "-30px" }}
           variants={containerVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto"
         >
           {QUICK_STATS.map((stat) => (
             <motion.div
@@ -225,13 +224,13 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-30px" }}
             variants={containerVariants}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {EDUCATION_JOURNEY.map((edu: EducationJourneyItem) => (
               <motion.div
                 key={edu.id}
                 variants={itemVariants}
-                className="relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-indigo-400/30 transition-all duration-300 flex flex-col justify-between group"
+                className="relative p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-indigo-400/30 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div className="space-y-4">
                   {/* Top Bar with Period and Status */}
@@ -247,32 +246,19 @@ export default function About() {
 
                   {/* Degree & College */}
                   <div>
-                    <h4 className="text-lg sm:text-xl font-bold text-white leading-snug group-hover:text-indigo-200 transition-colors">
+                    <h4 className="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-indigo-200 transition-colors">
                       {edu.degree}
                     </h4>
-                    <p className="text-xs sm:text-sm text-zinc-300 flex items-center gap-1.5 mt-1">
+                    <p className="text-xs sm:text-sm text-zinc-300 flex items-center gap-1.5 mt-1.5">
                       <MapPin className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                       <span>{edu.institution}</span>
                     </p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                     {edu.description}
                   </p>
-                </div>
-
-                {/* Highlights Tags */}
-                <div className="mt-6 pt-4 border-t border-white/[0.06] flex flex-wrap gap-2">
-                  {edu.highlights.map((highlight) => (
-                    <span
-                      key={highlight}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium bg-white/[0.04] border border-white/[0.08] text-zinc-300"
-                    >
-                      <CheckCircle2 className="w-3 h-3 text-indigo-400" />
-                      <span>{highlight}</span>
-                    </span>
-                  ))}
                 </div>
               </motion.div>
             ))}

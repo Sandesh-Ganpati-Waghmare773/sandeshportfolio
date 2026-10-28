@@ -2,20 +2,18 @@
  * =========================================================================
  * CERTIFICATES DATA REPOSITORY
  * -------------------------------------------------------------------------
- * Categorized certifications for Sandesh Waghmare (Computer Engineering).
+ * Verified authentic certifications for Sandesh Ganpati Waghmare.
  * Categories:
- *  - Course Completion (Includes actual certificates from Udemy & MindLuster)
- *  - Internship Certificates
- *  - Research Paper & Publication Certificates
- *  - Workshops & Training Certificates
+ *  - Internship (Cognifyz IT Solutions)
+ *  - Research & Publication (ISJEM Journal Publication)
+ *  - Course Completion (Udemy & MindLuster)
  * =========================================================================
  */
 
 export type CertificateCategory =
-  | "Course Completion"
   | "Internship"
   | "Research & Publication"
-  | "Workshops & Training";
+  | "Course Completion";
 
 export interface Certificate {
   id: string;
@@ -33,15 +31,86 @@ export interface Certificate {
 
 export const CERTIFICATE_CATEGORIES = [
   { id: "all", label: "All Certificates" },
-  { id: "Course Completion", label: "Course Completion" },
-  { id: "Internship", label: "Internship" },
+  { id: "Internship", label: "Internships" },
   { id: "Research & Publication", label: "Research & Publication" },
-  { id: "Workshops & Training", label: "Workshops & Training" },
+  { id: "Course Completion", label: "Course Completion" },
 ] as const;
 
 export const CERTIFICATES: readonly Certificate[] = [
   // =========================================================================
-  // 1. Course Completion Certificates (User-Provided Authentic Credentials)
+  // 1. Internship Certificates (Cognifyz IT Solutions Pvt. Ltd.)
+  // =========================================================================
+  {
+    id: "cognifyz-swe-internship-cert",
+    title: "Software Development Internship Certificate",
+    issuer: "Cognifyz IT Solutions Pvt. Ltd.",
+    date: "06/07/2026",
+    duration: "05/06/2026 – 05/07/2026",
+    image: "/images/certificates/cognifyz-swe-internship-cert.jpg",
+    pdfUrl: "/certificates/cognifyz-swe-internship-cert.pdf",
+    credentialUrl: "https://www.cognifyz.com",
+    credentialId: "CTI/A1/C368416",
+    category: "Internship",
+    skills: ["Software Development", "Algorithm Implementation", "Code Quality", "Testing & Debugging"],
+  },
+  {
+    id: "cognifyz-web-internship-cert",
+    title: "Web Development Internship Certificate",
+    issuer: "Cognifyz IT Solutions Pvt. Ltd.",
+    date: "09/07/2026",
+    duration: "09/06/2026 – 09/07/2026",
+    image: "/images/certificates/cognifyz-web-internship-cert.jpg",
+    pdfUrl: "/certificates/cognifyz-web-internship-cert.pdf",
+    credentialUrl: "https://www.cognifyz.com",
+    credentialId: "CTI/A1/C371547",
+    category: "Internship",
+    skills: ["Web Development", "Frontend & Backend Integration", "Responsive UI", "REST APIs"],
+  },
+  {
+    id: "cognifyz-swe-offer-letter",
+    title: "Software Development Intern — Offer Letter",
+    issuer: "Cognifyz IT Solutions Pvt. Ltd.",
+    date: "05/06/2026",
+    duration: "Offer of Internship",
+    image: "/images/certificates/cognifyz-swe-offer-letter.jpg",
+    pdfUrl: "/certificates/cognifyz-swe-offer-letter.pdf",
+    credentialUrl: "https://www.cognifyz.com",
+    credentialId: "CTI/A1/C368416",
+    category: "Internship",
+    skills: ["Software Engineering", "Technical Selection", "Problem Solving", "Professional Development"],
+  },
+  {
+    id: "cognifyz-web-offer-letter",
+    title: "Web Development Intern — Offer Letter",
+    issuer: "Cognifyz IT Solutions Pvt. Ltd.",
+    date: "08/06/2026",
+    duration: "Offer of Internship",
+    image: "/images/certificates/cognifyz-web-offer-letter.jpg",
+    pdfUrl: "/certificates/cognifyz-web-offer-letter.pdf",
+    credentialUrl: "https://www.cognifyz.com",
+    credentialId: "CTI/A1/C371547",
+    category: "Internship",
+    skills: ["Web Architecture", "Frontend Development", "Backend Development", "Technical Onboarding"],
+  },
+
+  // =========================================================================
+  // 2. Research Paper & Publication Certificates (ISJEM Journal)
+  // =========================================================================
+  {
+    id: "isjem-ai-research-paper-cert",
+    title: "Research Paper Acceptance: 'Impact of AI on Social Life'",
+    issuer: "International Scientific Journal of Engineering & Management (ISJEM)",
+    date: "Dec 2025",
+    duration: "Peer-Reviewed Journal",
+    image: "/images/certificates/isjem-ai-research-paper-cert.jpg",
+    credentialUrl: "https://www.isjem.com",
+    credentialId: "ISSN: 2583-6129 | Vol 04 Issue 12",
+    category: "Research & Publication",
+    skills: ["Artificial Intelligence", "Academic Research", "Paper Publication", "Social Impact of AI", "Peer Review"],
+  },
+
+  // =========================================================================
+  // 3. Course Completion Certificates (Udemy & MindLuster)
   // =========================================================================
   {
     id: "python-ml-finance",
@@ -94,61 +163,5 @@ export const CERTIFICATES: readonly Certificate[] = [
     credentialId: "177dd6e9",
     category: "Course Completion",
     skills: ["Computer Architecture", "80386 Microprocessor", "Assembly & Systems", "Hardware Logic"],
-  },
-
-  // =========================================================================
-  // 2. Internship Certificates
-  // =========================================================================
-  {
-    id: "internship-web-dev",
-    title: "Software Engineering & Web Development Internship",
-    issuer: "Industry Engineering Practicum",
-    date: "2024 – 2025",
-    duration: "3 Months",
-    image: "/images/certificates/fullstack-cert.jpg",
-    credentialId: "INT-SWE-2025-SW",
-    category: "Internship",
-    skills: ["Next.js", "React Architecture", "REST APIs", "Production Workflows"],
-  },
-
-  // =========================================================================
-  // 3. Research Paper & Publication Certificates
-  // =========================================================================
-  {
-    id: "research-paper-pub",
-    title: "Technical Paper Presentation & Research Publication",
-    issuer: "National Engineering Research Forum",
-    date: "2025",
-    duration: "Peer-Reviewed",
-    image: "/images/certificates/fullstack-cert.jpg",
-    credentialId: "PUB-CS-CONF-8821",
-    category: "Research & Publication",
-    skills: ["Technical Research", "Paper Publication", "System Architecture", "Academic Presentation"],
-  },
-
-  // =========================================================================
-  // 4. Workshops & Training Certificates
-  // =========================================================================
-  {
-    id: "fullstack-bootcamp",
-    title: "Full-Stack Web Development Bootcamp & Architecture Workshop",
-    issuer: "Engineering Developer Circle",
-    date: "2024",
-    duration: "Bootcamp Series",
-    image: "/images/certificates/fullstack-cert.jpg",
-    credentialId: "WKSHP-FS-4290",
-    category: "Workshops & Training",
-    skills: ["Component Architecture", "Tailwind CSS", "TypeScript", "Database Integration"],
-  },
-  {
-    id: "cpp-algorithms-cert",
-    title: "Problem Solving & Algorithmic Rigor in C++",
-    issuer: "Competitive Coding Platform",
-    date: "2024",
-    duration: "Verified Skill",
-    image: "/images/certificates/fullstack-cert.jpg",
-    credentialId: "HR-CPP-773419",
-    category: "Workshops & Training",
-    skills: ["C++", "Data Structures", "Algorithmic Efficiency", "STL"],
   },
 ] as const;

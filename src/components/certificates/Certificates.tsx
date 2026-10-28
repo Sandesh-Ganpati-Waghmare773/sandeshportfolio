@@ -12,7 +12,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   Award,
   Calendar,
-  ExternalLink,
   ShieldCheck,
   CheckCircle2,
   FileText,
@@ -504,32 +503,7 @@ export default function Certificates() {
 
                       {/* Action Buttons */}
                       <div className="p-5 pt-0 sm:p-6 sm:pt-0 border-t border-white/[0.04] mt-2 flex items-center gap-2 relative z-30">
-                        {cert.credentialUrl ? (
-                          <a
-                            href={cert.credentialUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              // If not center card, rotate to center first
-                              if (!isCenter) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setActiveIndex(index);
-                              }
-                            }}
-                            className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer shadow-sm"
-                            aria-label={`Verify ${cert.title} credential online`}
-                          >
-                            <span>Verify Credential</span>
-                            <ExternalLink className="w-3.5 h-3.5 text-indigo-400" />
-                          </a>
-                        ) : (
-                          <div className="flex-1 py-2 text-center text-xs font-mono text-zinc-500">
-                            Credential on file
-                          </div>
-                        )}
-
-                        {cert.pdfUrl && (
+                        {cert.pdfUrl ? (
                           <a
                             href={cert.pdfUrl}
                             target="_blank"
@@ -541,11 +515,29 @@ export default function Certificates() {
                                 setActiveIndex(index);
                               }
                             }}
-                            className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 text-zinc-300 hover:text-white transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer"
+                            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer shadow-sm"
                             aria-label={`View PDF certificate for ${cert.title}`}
-                            title="Open Certificate PDF"
                           >
                             <FileText className="w-4 h-4 text-indigo-400" />
+                            <span>View Certificate (PDF)</span>
+                          </a>
+                        ) : (
+                          <a
+                            href={cert.image}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              if (!isCenter) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setActiveIndex(index);
+                              }
+                            }}
+                            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-indigo-400/40 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer shadow-sm"
+                            aria-label={`View certificate image for ${cert.title}`}
+                          >
+                            <FileText className="w-4 h-4 text-indigo-400" />
+                            <span>View Certificate</span>
                           </a>
                         )}
                       </div>

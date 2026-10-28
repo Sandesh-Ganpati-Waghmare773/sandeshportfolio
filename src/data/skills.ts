@@ -19,7 +19,7 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   {
     id: "programming",
     title: "Programming",
-    description: "Core languages for building robust software, solving algorithmic challenges, and engineering scalable logic.",
+    description: "Core languages and runtime platforms for building robust software, solving algorithmic challenges, and engineering backend logic.",
     icon: "Code2",
     skills: [
       {
@@ -31,27 +31,18 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
         featured: true,
       },
       {
+        name: "C",
+        level: "Working Knowledge",
+        description: "Low-level memory management, pointers, and fundamental systems architecture.",
+        icon: "C",
+        badge: "Systems Basis",
+      },
+      {
         name: "Python",
         level: "Proficient",
-        description: "Scripting, rapid prototyping, data manipulation, and backend logic.",
+        description: "Scripting, rapid prototyping, data manipulation, automation, and backend logic.",
         icon: "Python",
         badge: "Versatile Logic",
-        featured: true,
-      },
-      {
-        name: "JavaScript (ES6+)",
-        level: "Proficient",
-        description: "Asynchronous programming, closures, event-driven web architecture, and DOM.",
-        icon: "JavaScript",
-        badge: "Web Core",
-        featured: true,
-      },
-      {
-        name: "TypeScript",
-        level: "Proficient",
-        description: "Static typing, generics, strict type safety, and scalable full-stack applications.",
-        icon: "TypeScript",
-        badge: "Type Safety",
         featured: true,
       },
       {
@@ -62,18 +53,34 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
         badge: "OOP Foundations",
       },
       {
-        name: "C",
-        level: "Working Knowledge",
-        description: "Low-level memory management, pointers, and fundamental systems architecture.",
-        icon: "C",
-        badge: "Systems Basis",
+        name: "Node.js",
+        level: "Proficient",
+        description: "Event-driven asynchronous runtime, server-side development, npm ecosystem, and RESTful APIs.",
+        icon: "Nodejs",
+        badge: "Backend Runtime",
+        featured: true,
+      },
+      {
+        name: "Express.js",
+        level: "Proficient",
+        description: "Lightweight backend web framework, middleware pipelines, routing, and REST API services.",
+        icon: "Express",
+        badge: "Backend Framework",
+      },
+      {
+        name: "TypeScript",
+        level: "Proficient",
+        description: "Static typing, generics, strict type safety, and scalable full-stack applications.",
+        icon: "TypeScript",
+        badge: "Type Safety",
+        featured: true,
       },
     ],
   },
   {
     id: "frontend",
     title: "Frontend",
-    description: "Modern frameworks and design engineering tools for responsive, performant user interfaces.",
+    description: "Modern frameworks, client-side languages, and mobile UI toolkits for responsive, performant user interfaces.",
     icon: "Layout",
     skills: [
       {
@@ -93,6 +100,21 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
         featured: true,
       },
       {
+        name: "JavaScript (ES6+)",
+        level: "Proficient",
+        description: "Asynchronous programming, modern ES6+ syntax, DOM manipulation, and interactive web architecture.",
+        icon: "JavaScript",
+        badge: "Web Core",
+        featured: true,
+      },
+      {
+        name: "HTML5 & Modern CSS3",
+        level: "Proficient",
+        description: "Semantic web standards, CSS Grid, Flexbox, accessible markup, modern styling, and animations.",
+        icon: "HtmlCss",
+        badge: "Core Web",
+      },
+      {
         name: "Tailwind CSS",
         level: "Proficient",
         description: "Utility-first design systems, custom configuration, responsive design, and CSS variables.",
@@ -101,11 +123,33 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
         featured: true,
       },
       {
-        name: "HTML5 & Modern CSS3",
-        level: "Proficient",
-        description: "Semantic web standards, CSS Grid, Flexbox, accessible markup, and animations.",
-        icon: "HtmlCss",
-        badge: "Core Foundations",
+        name: "Flutter",
+        level: "Working Knowledge",
+        description: "Cross-platform mobile and desktop UI toolkit, reactive state management, and native rendering.",
+        icon: "Flutter",
+        badge: "Cross-Platform UI",
+        featured: true,
+      },
+      {
+        name: "Dart",
+        level: "Working Knowledge",
+        description: "Client-optimized language for multi-platform apps, strong typing, and asynchronous programming.",
+        icon: "Dart",
+        badge: "Flutter Language",
+      },
+      {
+        name: "Kotlin",
+        level: "Working Knowledge",
+        description: "Modern Android UI development, null safety, coroutines, and Jetpack Compose foundations.",
+        icon: "Kotlin",
+        badge: "Android Frontend",
+      },
+      {
+        name: "Swift",
+        level: "Working Knowledge",
+        description: "Modern iOS application development, clean syntax, Apple ecosystem, and SwiftUI foundations.",
+        icon: "Swift",
+        badge: "iOS Frontend",
       },
       {
         name: "Framer Motion",
@@ -126,7 +170,7 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   {
     id: "tools",
     title: "Tools & Technologies",
-    description: "Modern developer workflow tools, version control, environments, and testing utilities.",
+    description: "Modern developer workflow tools, version control, design software, CMS, and deployment utilities.",
     icon: "Wrench",
     skills: [
       {
@@ -136,6 +180,21 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
         icon: "Git",
         badge: "Version Control",
         featured: true,
+      },
+      {
+        name: "Figma",
+        level: "Proficient",
+        description: "UI/UX wireframing, high-fidelity prototyping, design systems, and developer handoff.",
+        icon: "Figma",
+        badge: "UI/UX Design",
+        featured: true,
+      },
+      {
+        name: "WordPress",
+        level: "Working Knowledge",
+        description: "CMS architecture, theme customization, plugin integration, SEO optimization, and content management.",
+        icon: "WordPress",
+        badge: "CMS & Web Publishing",
       },
       {
         name: "VS Code",

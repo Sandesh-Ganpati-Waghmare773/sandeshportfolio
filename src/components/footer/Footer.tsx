@@ -167,10 +167,6 @@ export default function Footer() {
               <span className="text-zinc-300 font-medium">Sandesh Waghmare</span>.
               All rights reserved.
             </span>
-            <span className="hidden sm:inline-block text-zinc-700">&bull;</span>
-            <span className="text-zinc-500 inline-flex items-center gap-1">
-              Built with Next.js, React &amp; Tailwind
-            </span>
           </div>
 
           {/* Back to Top Button */}

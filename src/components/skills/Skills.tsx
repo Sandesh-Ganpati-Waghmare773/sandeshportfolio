@@ -33,10 +33,34 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
           C++
         </span>
       );
+    case "C":
+      return (
+        <span className="font-mono font-bold text-xs text-zinc-300 bg-zinc-500/10 px-1.5 py-0.5 rounded border border-zinc-500/20">
+          C
+        </span>
+      );
     case "Python":
       return (
         <span className="font-mono font-bold text-xs text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
           PY
+        </span>
+      );
+    case "Java":
+      return (
+        <span className="font-mono font-bold text-xs text-orange-400 bg-orange-500/10 px-1.5 py-0.5 rounded border border-orange-500/20">
+          JAVA
+        </span>
+      );
+    case "Nodejs":
+      return (
+        <span className="font-mono font-bold text-xs text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+          NODE
+        </span>
+      );
+    case "Express":
+      return (
+        <span className="font-mono font-bold text-xs text-zinc-300 bg-zinc-500/10 px-1.5 py-0.5 rounded border border-zinc-500/20">
+          EXPRESS
         </span>
       );
     case "JavaScript":
@@ -49,18 +73,6 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
       return (
         <span className="font-mono font-bold text-xs text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">
           TS
-        </span>
-      );
-    case "Java":
-      return (
-        <span className="font-mono font-bold text-xs text-orange-400 bg-orange-500/10 px-1.5 py-0.5 rounded border border-orange-500/20">
-          JAVA
-        </span>
-      );
-    case "C":
-      return (
-        <span className="font-mono font-bold text-xs text-zinc-300 bg-zinc-500/10 px-1.5 py-0.5 rounded border border-zinc-500/20">
-          C
         </span>
       );
     case "React":
@@ -78,10 +90,99 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
           <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.8 14.5-5.2-7.8h-1.5v6.6h1.3v-5l4.8 6.2h.6z" />
         </svg>
       );
+    case "HtmlCss":
+      return (
+        <span className="font-mono font-bold text-xs text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20">
+          HTML/CSS
+        </span>
+      );
     case "Tailwind":
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
           <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
+        </svg>
+      );
+    case "Flutter":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-cyan-400`}>
+          <path d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372zm0 11.457L8.457 17.314l3.7 3.7 2.157-2.157 5.886 5.143h7.372l-9.572-8.371 4.115-4.172h-7.8z" />
+        </svg>
+      );
+    case "Dart":
+      return (
+        <span className="font-mono font-bold text-xs text-teal-400 bg-teal-500/10 px-1.5 py-0.5 rounded border border-teal-500/20">
+          DART
+        </span>
+      );
+    case "Kotlin":
+      return (
+        <span className="font-mono font-bold text-xs text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20">
+          KOTLIN
+        </span>
+      );
+    case "Swift":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-orange-400`}>
+          <path d="M20.25 18.75C17.5 21.5 12.8 22 8.7 19.9c4.2-.6 7.4-2.8 9.3-5.7-3.1 1.3-6.5 1.4-9.6.3-1.6-.6-3-1.5-4.1-2.7 1.8.4 3.7.4 5.5-.1C5.2 10.4 3.4 7.7 3 4.5c1.6 1.7 3.7 2.8 6 3.2C7.3 5.4 7.6 2.8 9.5.7c.3 3.6 2.7 6.8 6.1 8 1.5.5 3 .6 4.5.3-2 2.1-4.7 3.5-7.6 3.9 3.2.1 6.3-1 8.8-3 .4 3.1-.4 6.2-2.05 8.85z" />
+        </svg>
+      );
+    case "Figma":
+      return (
+        <svg viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M7 3h5v5H7a2.5 2.5 0 0 1 0-5z" fill="#F24E1E" />
+          <path d="M12 3h5a2.5 2.5 0 0 1 0 5h-5V3z" fill="#FF7262" />
+          <path d="M7 8h5v5H7a2.5 2.5 0 0 1 0-5z" fill="#A259FF" />
+          <circle cx="14.5" cy="10.5" r="2.5" fill="#1ABCFE" />
+          <path d="M7 13h5v5a2.5 2.5 0 1 1-5 0v-5z" fill="#0ACF83" />
+        </svg>
+      );
+    case "WordPress":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-sky-400`}>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.25c4.13 0 7.58 2.87 8.48 6.75l-4.59 12.57-3.14-9.35 1.55-.42a.45.45 0 0 0 .32-.43.45.45 0 0 0-.45-.45h-3.32a.45.45 0 0 0-.45.45c0 .23.17.41.38.44l1.32.26-2.12 6.13-1.62-4.9-1.35-4.08a8.73 8.73 0 0 1 4.67-1.39zm-8.73 8.75c0-1.84.6-3.54 1.62-4.92l4.8 13.15a8.73 8.73 0 0 1-6.42-8.23zm8.73 8.75c-1.31 0-2.54-.31-3.63-.86l3.63-10.52 3.68 10.49c-1.12.58-2.37.89-3.68.89zm7.1-3.83-3.61-10.42c.86-.07 1.65-.24 1.65-.24a.45.45 0 0 0 .4-.45.45.45 0 0 0-.45-.45h-2.31a.45.45 0 0 0-.45.45c0 .24.16.42.36.45l1.04.18-1.51 4.39-1.92-5.59a8.73 8.73 0 0 1 6.8 11.68z" />
+        </svg>
+      );
+    case "Git":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-orange-500`}>
+          <path d="M2.6 10.59 10.59 2.6a2 2 0 0 1 2.82 0l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0L2.6 13.41a2 2 0 0 1 0-2.82zm10.81 4.82a1.5 1.5 0 1 0-1.41-2.02l-2.18-1.09a1.5 1.5 0 0 0-.41-.71 1.5 1.5 0 1 0-1 1.41v2.18a1.5 1.5 0 1 0 1.41 1.41V14.4l2.18 1.09c.12.38.35.7.67.92h.02a1.5 1.5 0 0 0 .72-.0z" />
+        </svg>
+      );
+    case "VSCode":
+      return (
+        <span className="font-mono font-bold text-xs text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">
+          VS CODE
+        </span>
+      );
+    case "Postman":
+      return (
+        <span className="font-mono font-bold text-xs text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
+          POSTMAN
+        </span>
+      );
+    case "Docker":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-sky-400`}>
+          <path d="M22.5 10.5c-.3-.2-1.2-.4-2-.2-.2-.5-.6-1-1.1-1.3l-.6-.3-.3.6c-.3.7-.3 1.5 0 2.2-.6.3-1.6.4-2.5.4H2c-.6 0-1 .4-1 1 0 4.4 3.6 8 8 8 5.3 0 9.7-3.9 10-9.2.8-.2 1.6-.7 2.1-1.4l.4-.6-.5-.4zM7 7h2v2H7V7zm3 0h2v2h-2V7zm-6 3h2v2H4v-2zm3 0h2v2H7v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2zm-6-6h2v2h-2V4zm3 0h2v2h-2V4z" />
+        </svg>
+      );
+    case "FramerMotion":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} text-violet-400`}>
+          <path d="M4 2h16v8h-8zM4 10h8l8 8H4zM4 18h8v6z" />
+        </svg>
+      );
+    case "Smartphone":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-purple-400`}>
+          <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+          <path d="M12 18h.01" />
+        </svg>
+      );
+    case "Cloud":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${className} text-indigo-400`}>
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
         </svg>
       );
     case "Binary":

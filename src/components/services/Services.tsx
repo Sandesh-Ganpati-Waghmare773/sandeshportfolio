@@ -5,11 +5,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   Globe,
-  Code2,
-  FileCode,
-  Layout,
   Smartphone,
-  Server,
+  FileCode,
+  Bot,
+  MapPin,
   Sparkles,
   CheckCircle2,
   ArrowRight,
@@ -25,16 +24,14 @@ export default function Services() {
     switch (iconName) {
       case "Globe":
         return Globe;
-      case "Code2":
-        return Code2;
-      case "FileCode":
-        return FileCode;
-      case "Layout":
-        return Layout;
       case "Smartphone":
         return Smartphone;
-      case "Server":
-        return Server;
+      case "FileCode":
+        return FileCode;
+      case "Bot":
+        return Bot;
+      case "MapPin":
+        return MapPin;
       default:
         return Layers;
     }
@@ -122,7 +119,7 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-30px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="flex flex-wrap justify-center gap-6 sm:gap-8"
         >
           {SERVICES.map((service: ServiceItem) => {
             const Icon = getServiceIcon(service.icon);
@@ -130,7 +127,7 @@ export default function Services() {
               <motion.article
                 key={service.id}
                 variants={cardVariants}
-                className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:bg-white/[0.06] transition-all duration-300 flex flex-col justify-between ${service.accentBorder}`}
+                className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:bg-white/[0.06] transition-all duration-300 flex flex-col justify-between w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] ${service.accentBorder}`}
               >
                 {/* Background Ambient Highlight */}
                 <div
