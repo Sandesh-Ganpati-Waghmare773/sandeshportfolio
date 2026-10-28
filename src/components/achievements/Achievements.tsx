@@ -62,13 +62,42 @@ export default function Achievements() {
       aria-label="Achievements & Milestones"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Lighting */}
+      {/* Subtle Warm Brown & Orange Clean Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#FF8A00]/5 blur-[150px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-amber-600/5 blur-[150px] rounded-full" />
+        {/* Faint warm illumination */}
+        <div className="absolute top-[25%] left-[12%] w-[460px] h-[460px] bg-[radial-gradient(circle,rgba(58,33,15,0.14)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-[20%] right-[10%] w-[420px] h-[420px] bg-[radial-gradient(circle,rgba(90,45,12,0.12)_0%,rgba(255,138,0,0.02)_45%,transparent_70%)] blur-2xl" />
+
+        {/* Solitary thin arc in upper-right corner */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 900"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="achieve-arc-grad" x1="100%" y1="0%" x2="60%" y2="80%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="30%" stopColor="#5A2D0C" stopOpacity="0.30" />
+              <stop offset="70%" stopColor="#7A3B0B" stopOpacity="0.35" />
+              <stop offset="90%" stopColor="rgba(255, 138, 0, 0.15)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+          </defs>
+
+          {/* Solitary Sweeping Arc */}
+          <path
+            d="M 1480 80 C 1200 180, 1080 440, 1420 700"
+            stroke="url(#achieve-arc-grad)"
+            strokeWidth="1.1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">

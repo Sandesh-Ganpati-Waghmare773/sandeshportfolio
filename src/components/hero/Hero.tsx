@@ -115,20 +115,112 @@ export default function Hero() {
       aria-label="Home / Hero Section"
       className="relative min-h-screen lg:min-h-[100dvh] w-full flex items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8"
     >
-      {/* Background Decorative Tech Grid & Ambient Radial Light */}
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
+        {/* Soft radial illumination behind/around profile card (right) and subtle lower-left warmth */}
+        <div className="absolute top-1/2 right-[5%] lg:right-[10%] -translate-y-1/2 w-[480px] h-[480px] bg-[radial-gradient(circle,rgba(90,45,12,0.22)_0%,rgba(58,33,15,0.12)_45%,transparent_70%)] blur-2xl" />
+        <div className="absolute top-1/2 right-[8%] lg:right-[12%] -translate-y-1/2 w-[340px] h-[340px] bg-[#FF8A00]/[0.035] blur-[100px] rounded-full" />
+        <div className="absolute bottom-10 left-[3%] w-[440px] h-[440px] bg-[radial-gradient(circle,rgba(58,33,15,0.18)_0%,transparent_70%)] blur-3xl" />
 
-        {/* Ambient Top Glow - Restrained Warm Amber */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#FF8A00]/5 blur-[140px] rounded-full" />
-        {/* Ambient Right Orb */}
-        <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-amber-600/5 blur-[150px] rounded-full" />
-        {/* Ambient Left Orb */}
-        <div className="absolute bottom-1/4 left-10 w-[300px] h-[300px] bg-orange-600/5 blur-[140px] rounded-full" />
+        {/* Large flowing curved lines & ribbon sweeping from lower-left to right behind profile card */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 900"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            {/* Flowing ribbon soft gradient fill */}
+            <linearGradient id="hero-ribbon-fill" x1="0%" y1="100%" x2="100%" y2="25%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="25%" stopColor="#4A260D" stopOpacity="0.12" />
+              <stop offset="55%" stopColor="#5A2D0C" stopOpacity="0.18" />
+              <stop offset="80%" stopColor="#7A3B0B" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#7A3B0B" stopOpacity="0" />
+            </linearGradient>
+
+            {/* Upper sweeping contour stroke */}
+            <linearGradient id="hero-stroke-upper" x1="0%" y1="100%" x2="100%" y2="20%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="25%" stopColor="#4A260D" stopOpacity="0.35" />
+              <stop offset="55%" stopColor="#5A2D0C" stopOpacity="0.55" />
+              <stop offset="80%" stopColor="#7A3B0B" stopOpacity="0.50" />
+              <stop offset="90%" stopColor="rgba(255, 138, 0, 0.25)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            {/* Lower sweeping contour stroke */}
+            <linearGradient id="hero-stroke-lower" x1="0%" y1="100%" x2="100%" y2="30%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="30%" stopColor="#4A260D" stopOpacity="0.30" />
+              <stop offset="65%" stopColor="#5A2D0C" stopOpacity="0.40" />
+              <stop offset="85%" stopColor="#7A3B0B" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#7A3B0B" stopOpacity="0" />
+            </linearGradient>
+
+            {/* Ambient secondary wave stroke */}
+            <linearGradient id="hero-stroke-secondary" x1="10%" y1="90%" x2="90%" y2="10%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.25" />
+              <stop offset="70%" stopColor="#5A2D0C" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            {/* Geometric accent line gradient */}
+            <linearGradient id="hero-diag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#5A2D0C" stopOpacity="0.30" />
+              <stop offset="100%" stopColor="#3A210F" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Flowing Ribbon Path */}
+          <path
+            d="M -100 860 C 240 820, 520 730, 760 570 C 980 420, 1160 300, 1540 250 L 1540 310 C 1180 360, 1000 480, 780 630 C 530 800, 250 880, -100 910 Z"
+            fill="url(#hero-ribbon-fill)"
+          />
+
+          {/* Upper Sweeping Arc / Crest Contour Line */}
+          <path
+            d="M -100 860 C 240 820, 520 730, 760 570 C 980 420, 1160 300, 1540 250"
+            stroke="url(#hero-stroke-upper)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Lower Sweeping Contour Line */}
+          <path
+            d="M -100 910 C 250 880, 530 800, 780 630 C 1000 480, 1180 360, 1540 310"
+            stroke="url(#hero-stroke-lower)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Secondary Whispering Harmonic Wave (Rising Higher toward upper right) */}
+          <path
+            d="M 50 930 C 400 880, 720 700, 990 490 C 1200 320, 1380 200, 1540 130"
+            stroke="url(#hero-stroke-secondary)"
+            strokeWidth="0.85"
+            strokeDasharray="8 6"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Subtle Geometric Diagonal Accent Line in Upper-Right Corner */}
+          <path
+            d="M 1240 80 L 1480 320"
+            stroke="url(#hero-diag-grad)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full">

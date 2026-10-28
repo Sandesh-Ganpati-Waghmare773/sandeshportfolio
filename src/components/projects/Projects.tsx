@@ -70,13 +70,75 @@ export default function Projects() {
       aria-label="Projects Portfolio"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[150px] rounded-full" />
-        <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[150px] rounded-full" />
+        {/* Soft radial illumination */}
+        <div className="absolute top-[20%] right-[10%] w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(58,33,15,0.16)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-[20%] left-[8%] w-[480px] h-[480px] bg-[radial-gradient(circle,rgba(90,45,12,0.14)_0%,rgba(255,138,0,0.025)_45%,transparent_70%)] blur-2xl" />
+
+        {/* Abstract flowing wave & geometric accent line */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="proj-wave-grad" x1="0%" y1="100%" x2="100%" y2="50%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="25%" stopColor="#4A260D" stopOpacity="0.30" />
+              <stop offset="60%" stopColor="#5A2D0C" stopOpacity="0.42" />
+              <stop offset="85%" stopColor="#7A3B0B" stopOpacity="0.35" />
+              <stop offset="95%" stopColor="rgba(255, 138, 0, 0.20)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            <linearGradient id="proj-wave-whisper" x1="0%" y1="90%" x2="100%" y2="40%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.22" />
+              <stop offset="80%" stopColor="#5A2D0C" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="#7A3B0B" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient id="proj-diag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#5A2D0C" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#3A210F" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Flowing Lower Wave Path */}
+          <path
+            d="M -40 850 C 350 780, 680 880, 1020 740 C 1220 650, 1380 720, 1500 680"
+            stroke="url(#proj-wave-grad)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Harmonic Whisper Wave */}
+          <path
+            d="M -40 900 C 320 830, 650 920, 1000 790 C 1200 700, 1360 760, 1500 720"
+            stroke="url(#proj-wave-whisper)"
+            strokeWidth="0.85"
+            strokeDasharray="8 6"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Geometric Diagonal Accent in Upper-Right */}
+          <path
+            d="M 1150 120 L 1420 390"
+            stroke="url(#proj-diag-grad)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">

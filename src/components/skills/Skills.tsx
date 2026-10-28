@@ -265,13 +265,59 @@ export default function Skills() {
       aria-label="Skills & Technical Expertise"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-amber-600/5 blur-[140px] rounded-full" />
+        {/* Faint warm illumination */}
+        <div className="absolute top-[35%] left-[8%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(58,33,15,0.16)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-[10%] right-[12%] w-[420px] h-[420px] bg-[radial-gradient(circle,rgba(90,45,12,0.12)_0%,rgba(255,138,0,0.025)_45%,transparent_70%)] blur-2xl" />
+
+        {/* Clean charcoal emphasis with partial arc entering from right edge */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="skills-arc-grad" x1="100%" y1="0%" x2="70%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="25%" stopColor="#5A2D0C" stopOpacity="0.35" />
+              <stop offset="65%" stopColor="#7A3B0B" stopOpacity="0.40" />
+              <stop offset="85%" stopColor="rgba(255, 138, 0, 0.18)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            <linearGradient id="skills-arc-whisper" x1="100%" y1="10%" x2="60%" y2="90%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.25" />
+              <stop offset="80%" stopColor="#5A2D0C" stopOpacity="0.20" />
+              <stop offset="100%" stopColor="#5A2D0C" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Sweeping Partial Arc entering from right edge */}
+          <path
+            d="M 1480 180 C 1220 320, 1140 620, 1480 820"
+            stroke="url(#skills-arc-grad)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Whisper concentric arc */}
+          <path
+            d="M 1480 240 C 1260 360, 1190 600, 1480 760"
+            stroke="url(#skills-arc-whisper)"
+            strokeWidth="0.85"
+            strokeDasharray="6 6"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">

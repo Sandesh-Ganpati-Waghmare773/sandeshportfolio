@@ -75,13 +75,57 @@ export default function Services() {
       aria-label="Services & Technical Solutions"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Subtle Warm Brown & Orange Clean Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-1/3 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[150px] rounded-full" />
+        {/* Faint warm illumination */}
+        <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(58,33,15,0.15)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-[15%] right-[10%] w-[460px] h-[460px] bg-[radial-gradient(circle,rgba(90,45,12,0.12)_0%,rgba(255,138,0,0.02)_45%,transparent_70%)] blur-2xl" />
+
+        {/* Abstract geometric diagonal lines and corner contour arc */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="serv-diag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="40%" stopColor="#5A2D0C" stopOpacity="0.28" />
+              <stop offset="80%" stopColor="#7A3B0B" stopOpacity="0.32" />
+              <stop offset="100%" stopColor="#3A210F" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient id="serv-arc-grad" x1="50%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#5A2D0C" stopOpacity="0.32" />
+              <stop offset="90%" stopColor="rgba(255, 138, 0, 0.16)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+          </defs>
+
+          {/* Geometric Diagonal Lines across upper-left */}
+          <path
+            d="M 60 80 L 320 340"
+            stroke="url(#serv-diag-grad)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Lower-Right Corner Contour Arc */}
+          <path
+            d="M 1120 950 C 1260 810, 1400 810, 1500 880"
+            stroke="url(#serv-arc-grad)"
+            strokeWidth="1.15"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-16 sm:space-y-20">

@@ -131,13 +131,61 @@ export default function Contact() {
       aria-label="Contact and Social Profiles"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[150px] rounded-full" />
+        {/* Soft radial illumination behind form (right) and status info (left) */}
+        <div className="absolute top-[25%] right-[8%] w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(90,45,12,0.18)_0%,rgba(58,33,15,0.10)_45%,transparent_70%)] blur-2xl" />
+        <div className="absolute top-[30%] right-[12%] w-[320px] h-[320px] bg-[#FF8A00]/[0.03] blur-[90px] rounded-full" />
+        <div className="absolute bottom-[15%] left-[8%] w-[480px] h-[480px] bg-[radial-gradient(circle,rgba(58,33,15,0.15)_0%,transparent_70%)] blur-3xl" />
+
+        {/* Abstract upward contour curve behind message form */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="contact-curve-grad" x1="0%" y1="100%" x2="100%" y2="20%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="30%" stopColor="#4A260D" stopOpacity="0.28" />
+              <stop offset="65%" stopColor="#5A2D0C" stopOpacity="0.40" />
+              <stop offset="85%" stopColor="#7A3B0B" stopOpacity="0.35" />
+              <stop offset="95%" stopColor="rgba(255, 138, 0, 0.20)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            <linearGradient id="contact-whisper-grad" x1="10%" y1="90%" x2="90%" y2="10%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.20" />
+              <stop offset="80%" stopColor="#5A2D0C" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#7A3B0B" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Upward Sweeping Curve */}
+          <path
+            d="M 300 950 C 650 900, 950 720, 1200 480 C 1350 340, 1450 240, 1500 180"
+            stroke="url(#contact-curve-grad)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Whisper Harmonic Curve */}
+          <path
+            d="M 280 990 C 630 940, 930 760, 1180 520 C 1330 380, 1430 280, 1500 220"
+            stroke="url(#contact-whisper-grad)"
+            strokeWidth="0.85"
+            strokeDasharray="8 6"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-16 sm:space-y-20">

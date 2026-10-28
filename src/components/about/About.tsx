@@ -69,13 +69,88 @@ export default function About() {
       aria-label="About Sandesh Waghmare"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Lighting */}
+      {/* Subtle Warm Brown & Orange Contour Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#FF8A00]/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-amber-600/5 blur-[140px] rounded-full" />
+        {/* Soft radial illumination */}
+        <div className="absolute top-[12%] left-[4%] w-[460px] h-[460px] bg-[radial-gradient(circle,rgba(58,33,15,0.18)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-[15%] right-[6%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(90,45,12,0.16)_0%,rgba(255,138,0,0.03)_45%,transparent_70%)] blur-2xl" />
+
+        {/* Abstract descending contour curves & geometric accents */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="about-contour-main" x1="0%" y1="0%" x2="100%" y2="80%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="20%" stopColor="#4A260D" stopOpacity="0.32" />
+              <stop offset="50%" stopColor="#5A2D0C" stopOpacity="0.45" />
+              <stop offset="75%" stopColor="#7A3B0B" stopOpacity="0.35" />
+              <stop offset="90%" stopColor="rgba(255, 138, 0, 0.20)" />
+              <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
+            </linearGradient>
+
+            <linearGradient id="about-contour-secondary" x1="0%" y1="20%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="30%" stopColor="#3A210F" stopOpacity="0.25" />
+              <stop offset="70%" stopColor="#5A2D0C" stopOpacity="0.30" />
+              <stop offset="100%" stopColor="#7A3B0B" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient id="about-ribbon-fill" x1="0%" y1="0%" x2="80%" y2="60%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0.10" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.08" />
+              <stop offset="80%" stopColor="#5A2D0C" stopOpacity="0.04" />
+              <stop offset="100%" stopColor="#5A2D0C" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient id="about-diag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#5A2D0C" stopOpacity="0" />
+              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#3A210F" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Subtle Top-Left Ambient Ribbon Fill */}
+          <path
+            d="M -60 100 C 320 180, 580 320, 880 280 L 880 320 C 560 370, 300 240, -60 160 Z"
+            fill="url(#about-ribbon-fill)"
+          />
+
+          {/* Primary Descending Contour Path */}
+          <path
+            d="M -60 100 C 320 180, 580 320, 880 280 C 1120 250, 1320 450, 1500 700"
+            stroke="url(#about-contour-main)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Parallel Whisper Path */}
+          <path
+            d="M -60 150 C 300 230, 560 370, 860 330 C 1100 300, 1300 500, 1500 750"
+            stroke="url(#about-contour-secondary)"
+            strokeWidth="0.85"
+            strokeDasharray="7 5"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Geometric Diagonal Lines across top-left area */}
+          <path
+            d="M 40 30 L 260 250"
+            stroke="url(#about-diag-grad)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-16 sm:space-y-24">

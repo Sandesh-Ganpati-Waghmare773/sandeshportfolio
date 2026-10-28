@@ -221,13 +221,58 @@ export default function Certificates() {
       aria-label="Certificates"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Subtle Warm Brown & Orange Panoramic Background Graphics */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-1/3 w-[550px] h-[550px] bg-[#FF8A00]/5 blur-[160px] rounded-full" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[160px] rounded-full" />
+        {/* Soft radial illumination centered behind 3D carousel stage */}
+        <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[420px] bg-[radial-gradient(ellipse,rgba(74,38,13,0.22)_0%,rgba(58,33,15,0.10)_45%,transparent_70%)] blur-2xl" />
+        <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-[#FF8A00]/[0.03] blur-[90px] rounded-full" />
+
+        {/* Panoramic sweeping contour curve under 3D carousel */}
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 1000"
+          fill="none"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="cert-contour-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
+              <stop offset="25%" stopColor="#4A260D" stopOpacity="0.30" />
+              <stop offset="50%" stopColor="#7A3B0B" stopOpacity="0.40" />
+              <stop offset="75%" stopColor="#5A2D0C" stopOpacity="0.30" />
+              <stop offset="100%" stopColor="#3A210F" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient id="cert-contour-whisper" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="10%" stopColor="#4A260D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#5A2D0C" stopOpacity="0.22" />
+              <stop offset="90%" stopColor="#4A260D" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Panoramic Lower Horizon Curve */}
+          <path
+            d="M -50 720 C 400 620, 1040 620, 1490 720"
+            stroke="url(#cert-contour-grad)"
+            strokeWidth="1.25"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+
+          {/* Whisper Harmonic Horizon Curve */}
+          <path
+            d="M -50 760 C 420 660, 1020 660, 1490 760"
+            stroke="url(#cert-contour-whisper)"
+            strokeWidth="0.85"
+            strokeDasharray="8 6"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+          />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12">
