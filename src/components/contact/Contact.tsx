@@ -6,7 +6,6 @@ import type { Variants } from "framer-motion";
 import {
   Mail,
   Send,
-  Sparkles,
   MapPin,
   Clock,
   CheckCircle2,
@@ -30,6 +29,7 @@ interface FormState {
   email: string;
   inquiryType: string;
   message: string;
+  hp: string;
 }
 
 export default function Contact() {
@@ -40,11 +40,13 @@ export default function Contact() {
     email: "",
     inquiryType: INQUIRY_TYPES[0],
     message: "",
+    hp: "",
   });
 
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [submittedData, setSubmittedData] = useState<FormState | null>(null);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [submittedName, setSubmittedName] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleCopyEmail = async () => {
@@ -66,10 +68,10 @@ export default function Contact() {
     if (errorMessage) setErrorMessage("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validation
+    // Client-side validation
     if (!formState.name.trim()) {
       setErrorMessage("Please enter your name.");
       return;
@@ -86,22 +88,63 @@ export default function Contact() {
     setIsSubmitting(true);
     setErrorMessage("");
 
-    // Simulate short UI interaction delay for realistic feel
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          inquiryType: formState.inquiryType,
+          message: formState.message,
+          hp: formState.hp,
+        }),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (response.ok && result?.success) {
+        setSubmittedName(formState.name.trim());
+        setIsSuccess(true);
+        // Clear form values only after confirmed success
+        setFormState({
+          name: "",
+          email: "",
+          inquiryType: INQUIRY_TYPES[0],
+          message: "",
+          hp: "",
+        });
+        setErrorMessage("");
+      } else {
+        // Preserve entered form data so the user doesn't lose their input
+        setErrorMessage(
+          result?.error ||
+            "Failed to send your message. Please try again or write directly to wsandesh560@gmail.com."
+        );
+      }
+    } catch (err) {
+      console.error("[Contact Form] Request error:", err);
+      setErrorMessage(
+        "A network error occurred while sending your message. Please check your internet connection or email wsandesh560@gmail.com directly."
+      );
+    } finally {
       setIsSubmitting(false);
-      setSubmittedData({ ...formState });
-    }, 600);
+    }
   };
 
   const handleResetForm = () => {
-    setSubmittedData(null);
+    setIsSuccess(false);
+    setSubmittedName("");
+    setErrorMessage("");
     setFormState({
       name: "",
       email: "",
       inquiryType: INQUIRY_TYPES[0],
       message: "",
+      hp: "",
     });
-    setErrorMessage("");
   };
 
   const containerVariants: Variants = {
@@ -378,77 +421,37 @@ export default function Contact() {
             className="lg:col-span-7"
           >
             <div className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-xl space-y-6">
-              {/* Ready for backend integration notice */}
-              <div className="p-3.5 rounded-xl bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-start gap-3">
-                <Sparkles className="w-4 h-4 text-[#FF8A00] shrink-0 mt-0.5" />
-                <div className="text-xs text-zinc-300 leading-relaxed">
-                  <span className="font-semibold text-[#FFB020]">Frontend UI Notice: </span>
-                  This contact form is fully styled and structured for future integration with services such as EmailJS, Resend, or API routes. You can also write to me directly at{" "}
-                  <a
-                    href={`mailto:${CONTACT_INFO.email}`}
-                    className="underline text-[#FFB020] hover:text-white"
-                  >
-                    {CONTACT_INFO.email}
-                  </a>.
-                </div>
-              </div>
-
               <AnimatePresence mode="wait">
-                {submittedData ? (
-                  /* Form Submission Feedback Card */
+                {isSuccess ? (
+                  /* Form Submission Success Card */
                   <motion.div
                     key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="p-6 sm:p-8 rounded-2xl bg-[#191C20] border border-[#292D32] text-center space-y-4"
+                    className="p-8 sm:p-10 rounded-2xl bg-[#191C20] border border-[#292D32] text-center space-y-5"
                   >
-                    <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto">
-                      <CheckCircle2 className="w-6 h-6" />
+                    <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto shadow-[0_0_25px_rgba(16,185,129,0.2)]">
+                      <CheckCircle2 className="w-7 h-7" />
                     </div>
 
-                    <div className="space-y-1">
-                      <h3 className="text-xl font-bold text-white">
-                        Message Preview Ready!
+                    <div className="space-y-2">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white">
+                        Message Sent Successfully!
                       </h3>
-                      <p className="text-xs sm:text-sm text-zinc-300 max-w-md mx-auto">
-                        Thank you, <span className="font-semibold text-[#FFB020]">{submittedData.name}</span>.
-                        Your message for <span className="text-[#FFB020] font-mono text-xs">[{submittedData.inquiryType}]</span> has been prepared.
+                      <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
+                        Thank you, <span className="font-semibold text-[#FFB020]">{submittedName || "there"}</span>. Your message has been delivered directly to Sandesh. You will receive a response at your email address within 24–48 hours.
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-[#0B0D0F] border border-[#292D32] text-left text-xs space-y-2 max-w-md mx-auto">
-                      <p className="text-zinc-400">
-                        <span className="text-zinc-500 font-mono">From:</span> {submittedData.name} ({submittedData.email})
-                      </p>
-                      <p className="text-zinc-400">
-                        <span className="text-zinc-500 font-mono">Topic:</span> {submittedData.inquiryType}
-                      </p>
-                      <p className="text-zinc-300 pt-1 border-t border-[#292D32] italic">
-                        &quot;{submittedData.message}&quot;
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-                      <a
-                        href={`mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(
-                          `[Portfolio Inquiry] ${submittedData.inquiryType} - ${submittedData.name}`
-                        )}&body=${encodeURIComponent(
-                          `Hi Sandesh,\n\nName: ${submittedData.name}\nEmail: ${submittedData.email}\nTopic: ${submittedData.inquiryType}\n\nMessage:\n${submittedData.message}`
-                        )}`}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
-                      >
-                        <Send className="w-4 h-4" />
-                        <span>Send Now via Email Client</span>
-                      </a>
-
+                    <div className="pt-3">
                       <button
                         type="button"
                         onClick={handleResetForm}
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-white bg-[#15181B] hover:bg-[#101214] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer"
                       >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                        <span>Write Another Message</span>
+                        <RotateCcw className="w-4 h-4 text-[#FF8A00]" />
+                        <span>Send Another Message</span>
                       </button>
                     </div>
                   </motion.div>
@@ -463,6 +466,19 @@ export default function Contact() {
                     className="space-y-5"
                     noValidate
                   >
+                    {/* Bot prevention honeypot (hidden from visitors) */}
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="contact-hp">Leave this empty</label>
+                      <input
+                        id="contact-hp"
+                        type="text"
+                        name="hp"
+                        value={formState.hp}
+                        onChange={handleInputChange}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </div>
                     {errorMessage && (
                       <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-2 text-xs text-red-300">
                         <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
@@ -566,7 +582,7 @@ export default function Contact() {
                         {isSubmitting ? (
                           <>
                             <span className="w-4 h-4 border-2 border-[#0B0D0F]/30 border-t-[#0B0D0F] rounded-full animate-spin" />
-                            <span>Preparing Message...</span>
+                            <span>Sending Message...</span>
                           </>
                         ) : (
                           <>
