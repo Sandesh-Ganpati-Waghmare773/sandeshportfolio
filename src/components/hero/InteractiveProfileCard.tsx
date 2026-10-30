@@ -9,7 +9,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import { GraduationCap, Sparkles, Terminal } from "lucide-react";
+import { GraduationCap, Sparkles } from "lucide-react";
 
 /**
  * =========================================================================
@@ -46,9 +46,9 @@ export default function InteractiveProfileCard({
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  // Subtle 3D tilt transforms: rotateX from Y-axis, rotateY from X-axis
-  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], ["9deg", "-9deg"]);
-  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], ["-9deg", "9deg"]);
+  // Subtle 3D tilt transforms: rotateX from Y-axis, rotateY from X-axis (controlled 3–6 degrees)
+  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], ["4.5deg", "-4.5deg"]);
+  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], ["-4.5deg", "4.5deg"]);
 
   // Subtle parallax depth shift for inner content
   const depthX = useTransform(smoothMouseX, [-0.5, 0.5], ["-6px", "6px"]);

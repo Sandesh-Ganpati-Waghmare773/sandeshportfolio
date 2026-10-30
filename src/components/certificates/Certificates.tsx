@@ -8,7 +8,13 @@ import React, {
   useMemo,
 } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Award,
   Calendar,
@@ -20,6 +26,8 @@ import {
   ChevronRight,
   Pause,
   Play,
+  X,
+  ExternalLink,
 } from "lucide-react";
 import {
   CERTIFICATES,
@@ -29,11 +37,14 @@ import {
 
 export default function Certificates() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [modalCert, setModalCert] = useState<Certificate | null>(null);
+  const [interactionPause, setInteractionPause] = useState<boolean>(false);
 
   // Parallax camera tilt angles (degrees)
   const [stageRotateX, setStageRotateX] = useState<number>(0);
@@ -43,8 +54,25 @@ export default function Certificates() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
-  // Autoplay timer reference
+  // Autoplay and interaction pause timer references
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Background contour curve parallax on scroll
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgContourParallaxY = useTransform(scrollYProgress, [0, 1], [-20, 30]);
+
+  // Temporary pause of autoplay when user interacts
+  const triggerInteractionPause = useCallback(() => {
+    setInteractionPause(true);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      setInteractionPause(false);
+    }, 6000);
+  }, []);
 
   // Filtered certificates based on selected category
   const filteredCertificates = useMemo(() => {
@@ -65,28 +93,46 @@ export default function Certificates() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModalCert(null);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
   // Safe clamped active index for circular math
   const safeActiveIndex = totalCards > 0 ? activeIndex % totalCards : 0;
 
   // Navigation handlers
   const goToNext = useCallback(() => {
     if (totalCards <= 1) return;
+    triggerInteractionPause();
     setActiveIndex((prev) => (prev + 1) % totalCards);
-  }, [totalCards]);
+  }, [totalCards, triggerInteractionPause]);
 
   const goToPrev = useCallback(() => {
     if (totalCards <= 1) return;
+    triggerInteractionPause();
     setActiveIndex((prev) => (prev - 1 + totalCards) % totalCards);
-  }, [totalCards]);
+  }, [totalCards, triggerInteractionPause]);
 
-  // Autoplay management (5-second intervals, paused when hovered/interacting)
+  // Autoplay management (5-second intervals, paused when hovered/interacting/modal open)
   useEffect(() => {
     if (autoplayTimerRef.current) {
       clearInterval(autoplayTimerRef.current);
       autoplayTimerRef.current = null;
     }
 
-    if (isPlaying && !isHovered && totalCards > 1 && !shouldReduceMotion) {
+    if (
+      isPlaying &&
+      !isHovered &&
+      !interactionPause &&
+      !modalCert &&
+      totalCards > 1 &&
+      !shouldReduceMotion
+    ) {
       autoplayTimerRef.current = setInterval(() => {
         goToNext();
       }, 5000);
@@ -97,7 +143,7 @@ export default function Certificates() {
         clearInterval(autoplayTimerRef.current);
       }
     };
-  }, [isPlaying, isHovered, totalCards, shouldReduceMotion, goToNext]);
+  }, [isPlaying, isHovered, interactionPause, modalCert, totalCards, shouldReduceMotion, goToNext]);
 
   // Subtle interactive parallax tilt based on mouse position over stage
   const handleMouseMoveStage = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -155,6 +201,7 @@ export default function Certificates() {
 
   // Card click handler: clicking side cards rotates them to front-center
   const handleCardClick = (targetIndex: number, offset: number) => {
+    triggerInteractionPause();
     if (offset !== 0) {
       setActiveIndex(targetIndex);
     }
@@ -168,8 +215,8 @@ export default function Certificates() {
    */
   const getCardGeometry = (d: number, isCenter: boolean) => {
     // Stage perspective constants
-    const radius = isMobile ? 360 : 540;
-    const angleStepDeg = isMobile ? 38 : 34;
+    const radius = isMobile ? 330 : 560;
+    const angleStepDeg = isMobile ? 36 : 32;
 
     const angleDeg = d * angleStepDeg;
     const angleRad = (angleDeg * Math.PI) / 180;
@@ -178,19 +225,19 @@ export default function Certificates() {
     const x = Math.sin(angleRad) * radius;
 
     // Depth: center card is closest; sides recede backwards in Z
-    const z = (Math.cos(angleRad) - 1) * radius + (isCenter ? 35 : 0);
+    const z = (Math.cos(angleRad) - 1) * radius + (isCenter ? 40 : 0);
 
     // Rotation around Y axis facing inwards toward the viewer
-    const rotateY = -d * (isMobile ? 26 : 28);
+    const rotateY = -d * (isMobile ? 24 : 26);
 
     // Perspective scale
-    const scale = isCenter ? 1.0 : Math.max(0.72, 1 - Math.abs(d) * 0.12);
+    const scale = isCenter ? 1.0 : Math.max(0.70, 1 - Math.abs(d) * 0.13);
 
-    // Opacity based on distance along the cylindrical track
+    // Opacity based on distance along the cylindrical track (2 left and 2 right visible on desktop)
     let opacity = 1;
     if (Math.abs(d) === 0) opacity = 1;
-    else if (Math.abs(d) === 1) opacity = 0.85;
-    else if (Math.abs(d) === 2) opacity = isMobile ? 0 : 0.5;
+    else if (Math.abs(d) === 1) opacity = isMobile ? 0.45 : 0.88;
+    else if (Math.abs(d) === 2) opacity = isMobile ? 0 : 0.65;
     else opacity = 0; // Behind cylinder
 
     // Proper depth layering (center card is always on top)
@@ -217,13 +264,17 @@ export default function Certificates() {
 
   return (
     <section
+      ref={sectionRef}
       id="certificates"
       aria-label="Certificates"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Subtle Warm Brown & Orange Panoramic Background Graphics */}
-      <div
+      {/* Subtle Warm Brown & Orange Panoramic Background Graphics with Scroll Parallax */}
+      <motion.div
         aria-hidden="true"
+        style={{
+          y: shouldReduceMotion ? 0 : bgContourParallaxY,
+        }}
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         {/* Soft radial illumination centered behind 3D carousel stage */}
@@ -273,7 +324,7 @@ export default function Certificates() {
             fill="none"
           />
         </svg>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12">
         {/* ========================================================= */}
@@ -367,7 +418,7 @@ export default function Certificates() {
         <div
           role="region"
           aria-roledescription="carousel"
-          aria-label="3D Certificate Carousel"
+          aria-label="Certificate Carousel"
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setIsHovered(true)}
@@ -548,43 +599,22 @@ export default function Certificates() {
 
                       {/* Action Buttons */}
                       <div className="p-5 pt-0 sm:p-6 sm:pt-0 border-t border-[#292D32] mt-2 flex items-center gap-2 relative z-30">
-                        {cert.pdfUrl ? (
-                          <a
-                            href={cert.pdfUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              if (!isCenter) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setActiveIndex(index);
-                              }
-                            }}
-                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-[#0B0D0F] bg-[#191C20] hover:bg-[#FF8A00] border border-[#292D32] hover:border-[#FF8A00] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer shadow-sm"
-                            aria-label={`View PDF certificate for ${cert.title}`}
-                          >
-                            <FileText className="w-4 h-4 text-[#FF8A00] transition-colors group-hover/btn:text-[#0B0D0F]" />
-                            <span>View Certificate (PDF)</span>
-                          </a>
-                        ) : (
-                          <a
-                            href={cert.image}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              if (!isCenter) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setActiveIndex(index);
-                              }
-                            }}
-                            className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-[#0B0D0F] bg-[#191C20] hover:bg-[#FF8A00] border border-[#292D32] hover:border-[#FF8A00] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer shadow-sm"
-                            aria-label={`View certificate image for ${cert.title}`}
-                          >
-                            <FileText className="w-4 h-4 text-[#FF8A00] transition-colors group-hover/btn:text-[#0B0D0F]" />
-                            <span>View Certificate</span>
-                          </a>
-                        )}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (!isCenter) {
+                              handleCardClick(index, offset);
+                            } else {
+                              setModalCert(cert);
+                            }
+                          }}
+                          className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 hover:text-[#0B0D0F] bg-[#191C20] hover:bg-[#FF8A00] border border-[#292D32] hover:border-[#FF8A00] transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer shadow-sm"
+                          aria-label={`View certificate details for ${cert.title}`}
+                        >
+                          <FileText className="w-4 h-4 text-[#FF8A00] transition-colors group-hover/btn:text-[#0B0D0F]" />
+                          <span>{cert.pdfUrl ? "View Certificate (PDF)" : "View Certificate"}</span>
+                        </button>
                       </div>
                     </article>
                   </div>
@@ -592,24 +622,24 @@ export default function Certificates() {
               })}
             </div>
 
-            {/* Left Circular 3D Navigation Control Button */}
+            {/* Left Circular Navigation Control Button */}
             {totalCards > 1 && (
               <button
                 type="button"
                 onClick={goToPrev}
-                aria-label="Previous certificate in 3D carousel"
+                aria-label="Previous certificate"
                 className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#15181B]/90 hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-300 hover:text-[#FFB020] backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer group"
               >
                 <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:-translate-x-0.5" />
               </button>
             )}
 
-            {/* Right Circular 3D Navigation Control Button */}
+            {/* Right Circular Navigation Control Button */}
             {totalCards > 1 && (
               <button
                 type="button"
                 onClick={goToNext}
-                aria-label="Next certificate in 3D carousel"
+                aria-label="Next certificate"
                 className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 p-3 sm:p-3.5 rounded-full bg-[#15181B]/90 hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-300 hover:text-[#FFB020] backdrop-blur-xl shadow-2xl transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer group"
               >
                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -686,6 +716,142 @@ export default function Certificates() {
           )}
         </div>
       </div>
+
+      {/* ========================================================= */}
+      {/* Certificate Enlarged Preview Modal                        */}
+      {/* ========================================================= */}
+      <AnimatePresence>
+        {modalCert && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${modalCert.title} Details`}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          >
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setModalCert(null)}
+              className="absolute inset-0 bg-[#0B0D0F]/85 backdrop-blur-md"
+            />
+
+            {/* Modal Dialog Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 15 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#15181B] border border-[#292D32] shadow-2xl p-6 sm:p-8 space-y-6 z-10"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setModalCert(null)}
+                aria-label="Close certificate preview"
+                className="absolute top-5 right-5 p-2 rounded-xl bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-400 hover:text-white transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Modal Header */}
+              <div className="space-y-2 pr-10">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020] text-xs font-mono uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF8A00]" />
+                  <span>{modalCert.category} &bull; Verified</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
+                  {modalCert.title}
+                </h3>
+                <p className="text-sm text-zinc-400 font-medium">
+                  Issued by <span className="text-zinc-200">{modalCert.issuer}</span> &bull; {modalCert.date}
+                </p>
+              </div>
+
+              {/* High-res Image Preview */}
+              <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#101214] border border-[#292D32] shadow-inner">
+                <Image
+                  src={modalCert.image}
+                  alt={modalCert.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* Certificate Metadata & Skills */}
+              <div className="space-y-4 pt-2 border-t border-[#292D32]">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-400">
+                  {modalCert.credentialId && (
+                    <span className="bg-[#191C20] border border-[#292D32] px-3 py-1 rounded-lg">
+                      Credential ID: <span className="text-zinc-200">{modalCert.credentialId}</span>
+                    </span>
+                  )}
+                  {modalCert.duration && (
+                    <span className="bg-[#191C20] border border-[#292D32] px-3 py-1 rounded-lg flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#FF8A00]" />
+                      <span>{modalCert.duration}</span>
+                    </span>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
+                  <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+                    Competencies &amp; Skills Covered
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {modalCert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-medium bg-[#191C20] border border-[#292D32] text-zinc-300"
+                      >
+                        <CheckCircle2 className="w-3 h-3 text-[#FF8A00]" />
+                        <span>{skill}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Direct Action Links */}
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  {modalCert.pdfUrl ? (
+                    <a
+                      href={modalCert.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_15px_rgba(255,138,0,0.25)] transition-all active:scale-95 border border-[#FFB020]/40"
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>Open Original PDF</span>
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+                    </a>
+                  ) : modalCert.credentialUrl ? (
+                    <a
+                      href={modalCert.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_15px_rgba(255,138,0,0.25)] transition-all active:scale-95 border border-[#FFB020]/40"
+                    >
+                      <span>Verify on Credential Portal</span>
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+                    </a>
+                  ) : null}
+
+                  <button
+                    type="button"
+                    onClick={() => setModalCert(null)}
+                    className="px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm text-zinc-300 hover:text-white bg-[#191C20] hover:bg-[#292D32] border border-[#292D32] transition-colors cursor-pointer"
+                  >
+                    Close Preview
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

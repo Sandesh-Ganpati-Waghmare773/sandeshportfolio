@@ -1,7 +1,14 @@
 "use client";
 
-import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import React, { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   ArrowRight,
@@ -14,6 +21,45 @@ import SocialIcon from "@/components/common/SocialIcon";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Subtle mouse and scroll parallax for decorative background elements
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { stiffness: 120, damping: 22 };
+  
+  // Layered 3D Stage Depth Planes
+  // 1. Background plane (recessed)
+  const bgParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-16, 16]), springConfig);
+  const bgParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-12, 12]), springConfig);
+  
+  // 2. Midground plane (Left typography and CTAs)
+  const midParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [6, -6]), springConfig);
+  const midParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
+
+  // 3. Foreground stage plane (Profile card)
+  const foreParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
+  const foreParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-10, 10]), springConfig);
+
+  const { scrollY } = useScroll();
+  const bgScrollY = useTransform(scrollY, [0, 800], [0, 45]);
+  const bgCombinedY = useTransform(
+    [bgParallaxY, bgScrollY],
+    ([pY, sY]) => Number(pY) + Number(sY)
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (shouldReduceMotion) return;
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   // Smooth scroll handler for hero CTA buttons
   const handleScrollTo = (
@@ -111,13 +157,20 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       id="home"
       aria-label="Home / Hero Section"
       className="relative min-h-screen lg:min-h-[100dvh] w-full flex items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8"
     >
-      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
-      <div
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics with Parallax Depth */}
+      <motion.div
         aria-hidden="true"
+        style={{
+          x: shouldReduceMotion ? 0 : bgParallaxX,
+          y: shouldReduceMotion ? 0 : bgCombinedY,
+        }}
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         {/* Soft radial illumination behind/around profile card (right) and subtle lower-left warmth */}
@@ -221,14 +274,22 @@ export default function Hero() {
             fill="none"
           />
         </svg>
-      </div>
+      </motion.div>
 
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto w-full" style={{ perspective: 1200, transformStyle: "preserve-3d" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center" style={{ transformStyle: "preserve-3d" }}>
           {/* ========================================================= */}
           {/* LEFT SIDE: Hero Introduction, Name, Role, CTAs, Socials   */}
           {/* ========================================================= */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left space-y-6 sm:space-y-7">
+          <motion.div
+            style={{
+              x: shouldReduceMotion ? 0 : midParallaxX,
+              y: shouldReduceMotion ? 0 : midParallaxY,
+              transform: shouldReduceMotion ? "none" : "translateZ(18px)",
+              transformStyle: "preserve-3d",
+            }}
+            className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left space-y-6 sm:space-y-7 relative z-20"
+          >
             {/* Step 1: Small Introduction Badge */}
             <motion.div
               variants={introVariants}
@@ -347,12 +408,20 @@ export default function Hero() {
                 })}
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* ========================================================= */}
           {/* RIGHT SIDE: Interactive 3D Profile Card with Photo        */}
           {/* ========================================================= */}
-          <div className="lg:col-span-5 flex justify-center items-center">
+          <motion.div
+            style={{
+              x: shouldReduceMotion ? 0 : foreParallaxX,
+              y: shouldReduceMotion ? 0 : foreParallaxY,
+              transform: shouldReduceMotion ? "none" : "translateZ(38px)",
+              transformStyle: "preserve-3d",
+            }}
+            className="lg:col-span-5 flex justify-center items-center relative z-30"
+          >
             {/* Step 6: Profile Image / Card Enters */}
             <motion.div
               variants={cardVariants}
@@ -362,7 +431,7 @@ export default function Hero() {
             >
               <InteractiveProfileCard />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

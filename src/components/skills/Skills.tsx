@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import React, { useState, useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useTransform,
+  useScroll,
+} from "framer-motion";
 import {
   Code2,
   Layout,
@@ -17,10 +21,13 @@ import {
   Layers,
   Globe,
   CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Sliders,
 } from "lucide-react";
 import {
   SKILL_CATEGORIES,
-  type SkillCategory,
   type SkillItem,
 } from "@/data/skills";
 
@@ -99,7 +106,7 @@ function SkillTechIcon({ icon, className = "w-5 h-5" }: { icon: string; classNam
     case "Tailwind":
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
+          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
         </svg>
       );
     case "Flutter":
@@ -221,60 +228,85 @@ function CategoryHeaderIcon({ icon }: { icon: string }) {
 }
 
 export default function Skills() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const orbitContainerRef = useRef<HTMLDivElement>(null);
 
-  // Filter categories or show all
-  const filteredCategories =
-    selectedCategory === "all"
-      ? SKILL_CATEGORIES
-      : SKILL_CATEGORIES.filter((cat) => cat.id === selectedCategory);
+  // Category state
+  const [selectedCategory, setSelectedCategory] = useState<string>("programming");
+  // Active focused skill index within the current category
+  const [activeSkillIdx, setActiveSkillIdx] = useState<number>(0);
+  // View mode: "spatial" (3D ecosystem) or "detailed"
+  const [viewMode, setViewMode] = useState<"spatial" | "detailed">("spatial");
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.08,
-      },
-    },
+  // Drag rotation angle (in radians)
+  const [rotationAngle, setRotationAngle] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const dragStartXRef = useRef<number>(0);
+  const startAngleRef = useRef<number>(0);
+
+  // Background slow scroll parallax
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const bgArcParallaxY = useTransform(scrollYProgress, [0, 1], [-20, 30]);
+
+  // Current category skills
+  const activeCategory =
+    SKILL_CATEGORIES.find((cat) => cat.id === selectedCategory) || SKILL_CATEGORIES[0];
+  const skillsList = activeCategory.skills;
+
+  // Touch and Mouse Drag Handlers for rotating the 3D ecosystem
+  const handlePointerDown = (clientX: number) => {
+    setIsDragging(true);
+    dragStartXRef.current = clientX;
+    startAngleRef.current = rotationAngle;
   };
 
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? { duration: 0 }
-        : { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] },
-    },
+  const handlePointerMove = (clientX: number) => {
+    if (!isDragging) return;
+    const deltaX = clientX - dragStartXRef.current;
+    // Map pixels to rotation radians (300px = full circle)
+    const newAngle = startAngleRef.current + (deltaX / 300) * Math.PI;
+    setRotationAngle(newAngle);
+  };
+
+  const handlePointerUp = () => {
+    setIsDragging(false);
+  };
+
+  // Next / Previous rotation step controls
+  const stepRotation = (direction: 1 | -1) => {
+    const step = (2 * Math.PI) / skillsList.length;
+    setRotationAngle((prev) => prev - direction * step);
+    setActiveSkillIdx((prev) => (prev + direction + skillsList.length) % skillsList.length);
   };
 
   const filterTabs = [
-    { id: "all", label: "All Skills" },
     { id: "programming", label: "Programming" },
     { id: "frontend", label: "Frontend" },
     { id: "tools", label: "Tools & Technologies" },
     { id: "core-cs", label: "Other Technical Skills" },
   ];
 
+  const currentSkill = skillsList[activeSkillIdx] || skillsList[0];
+
   return (
     <section
+      ref={sectionRef}
       id="skills"
       aria-label="Skills & Technical Expertise"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
-      <div
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics with Scroll Parallax */}
+      <motion.div
         aria-hidden="true"
+        style={{
+          y: shouldReduceMotion ? 0 : bgArcParallaxY,
+        }}
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        {/* Faint warm illumination */}
         <div className="absolute top-[35%] left-[8%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(58,33,15,0.16)_0%,transparent_70%)] blur-3xl" />
         <div className="absolute bottom-[10%] right-[12%] w-[420px] h-[420px] bg-[radial-gradient(circle,rgba(90,45,12,0.12)_0%,rgba(255,138,0,0.025)_45%,transparent_70%)] blur-2xl" />
 
-        {/* Clean charcoal emphasis with partial arc entering from right edge */}
         <svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 1440 1000"
@@ -290,16 +322,7 @@ export default function Skills() {
               <stop offset="85%" stopColor="rgba(255, 138, 0, 0.18)" />
               <stop offset="100%" stopColor="rgba(255, 138, 0, 0)" />
             </linearGradient>
-
-            <linearGradient id="skills-arc-whisper" x1="100%" y1="10%" x2="60%" y2="90%">
-              <stop offset="0%" stopColor="#3A210F" stopOpacity="0" />
-              <stop offset="40%" stopColor="#4A260D" stopOpacity="0.25" />
-              <stop offset="80%" stopColor="#5A2D0C" stopOpacity="0.20" />
-              <stop offset="100%" stopColor="#5A2D0C" stopOpacity="0" />
-            </linearGradient>
           </defs>
-
-          {/* Sweeping Partial Arc entering from right edge */}
           <path
             d="M 1480 180 C 1220 320, 1140 620, 1480 820"
             stroke="url(#skills-arc-grad)"
@@ -307,18 +330,8 @@ export default function Skills() {
             vectorEffect="non-scaling-stroke"
             fill="none"
           />
-
-          {/* Whisper concentric arc */}
-          <path
-            d="M 1480 240 C 1260 360, 1190 600, 1480 760"
-            stroke="url(#skills-arc-whisper)"
-            strokeWidth="0.85"
-            strokeDasharray="6 6"
-            vectorEffect="non-scaling-stroke"
-            fill="none"
-          />
         </svg>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto w-full space-y-12 sm:space-y-16">
         {/* ========================================================= */}
@@ -348,9 +361,10 @@ export default function Skills() {
         </motion.div>
 
         {/* ========================================================= */}
-        {/* Interactive Category Filter Tabs                          */}
+        {/* Top Controls: Category Tabs & View Mode Toggle            */}
         {/* ========================================================= */}
-        <div className="flex justify-center">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Category Tabs */}
           <nav
             role="tablist"
             aria-label="Skill Categories Filter"
@@ -364,8 +378,12 @@ export default function Skills() {
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  onClick={() => setSelectedCategory(tab.id)}
-                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
+                  onClick={() => {
+                    setSelectedCategory(tab.id);
+                    setActiveSkillIdx(0);
+                    setRotationAngle(0);
+                  }}
+                  className={`relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] cursor-pointer ${
                     isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
                   }`}
                 >
@@ -386,107 +404,300 @@ export default function Skills() {
             })}
           </nav>
 
+          {/* View Mode Toggle: Interactive vs Grid List */}
+          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#15181B] border border-[#292D32] text-xs font-mono">
+            <button
+              type="button"
+              onClick={() => setViewMode("spatial")}
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                viewMode === "spatial"
+                  ? "bg-[#FF8A00]/15 text-[#FFB020] border border-[#FF8A00]/30 font-semibold shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <span>Interactive View</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("detailed")}
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                viewMode === "detailed"
+                  ? "bg-[#FF8A00]/15 text-[#FFB020] border border-[#FF8A00]/30 font-semibold shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <span>Grid View</span>
+            </button>
+          </div>
         </div>
 
         {/* ========================================================= */}
-        {/* Skills Categories and Cards Grid                          */}
+        {/* Active Category Description Header                        */}
         {/* ========================================================= */}
-        <div className="space-y-14 sm:space-y-16">
-          <AnimatePresence mode="wait">
-            {filteredCategories.map((category: SkillCategory) => (
-              <motion.div
-                key={category.id}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -10 }}
-                transition={{ duration: 0.35 }}
-                className="space-y-6"
-              >
-                {/* Category Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#292D32]">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#15181B] border border-[#292D32] flex items-center justify-center shadow-sm">
-                      <CategoryHeaderIcon icon={category.icon} />
-                    </div>
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                        {category.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-zinc-400">
-                        {category.description}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-mono text-zinc-500 self-start sm:self-auto">
-                    {category.skills.length} skills listed
-                  </span>
-                </div>
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#15181B]/80 border border-[#292D32] flex flex-col sm:flex-row sm:items-center justify-between gap-3 backdrop-blur-md">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#191C20] border border-[#292D32] flex items-center justify-center shadow-sm">
+              <CategoryHeaderIcon icon={activeCategory.icon} />
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                {activeCategory.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 max-w-xl">
+                {activeCategory.description}
+              </p>
+            </div>
+          </div>
+          <span className="text-xs font-mono text-[#FFB020] bg-[#FF8A00]/10 border border-[#FF8A00]/20 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
+            {skillsList.length} Technologies Listed
+          </span>
+        </div>
 
-                {/* Skill Cards Grid */}
-                <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
-                >
-                  {category.skills.map((skill: SkillItem) => (
+        {/* ========================================================= */}
+        {/* VIEW MODE 1: Interactive Spatial Ecosystem                */}
+        {/* ========================================================= */}
+        {viewMode === "spatial" && (
+          <div className="space-y-8">
+            {/* Interactive Orbit Stage */}
+            <div
+              ref={orbitContainerRef}
+              onMouseDown={(e) => handlePointerDown(e.clientX)}
+              onMouseMove={(e) => handlePointerMove(e.clientX)}
+              onMouseUp={handlePointerUp}
+              onMouseLeave={handlePointerUp}
+              onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
+              onTouchMove={(e) => handlePointerMove(e.touches[0].clientX)}
+              onTouchEnd={handlePointerUp}
+              style={{ perspective: 1200 }}
+              className="relative w-full h-[460px] sm:h-[520px] flex items-center justify-center overflow-hidden rounded-3xl bg-[#101214] border border-[#292D32] shadow-2xl select-none cursor-grab active:cursor-grabbing"
+            >
+              {/* Central Category Hub */}
+              <div
+                aria-hidden="true"
+                style={{ transform: "translateZ(0px)" }}
+                className="pointer-events-none absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-dashed border-[#FF8A00]/30 flex flex-col items-center justify-center p-4 text-center bg-radial from-[#FF8A00]/10 via-[#15181B] to-[#101214] shadow-[0_0_35px_rgba(255,138,0,0.12)] z-10"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#FF8A00]/15 border border-[#FF8A00]/30 flex items-center justify-center text-[#FF8A00] mb-1.5">
+                  <CategoryHeaderIcon icon={activeCategory.icon} />
+                </div>
+                <p className="text-[11px] font-mono font-bold text-white uppercase tracking-wider">
+                  {activeCategory.title.split(" ")[0]}
+                </p>
+                <p className="text-[9px] font-mono text-[#FFB020]">Overview</p>
+              </div>
+
+              {/* Orbital Ring Guidelines */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute w-[90%] sm:w-[580px] h-[280px] sm:h-[340px] rounded-[50%] border border-[#292D32]/60 rotate-x-[60deg] shadow-inner"
+              />
+
+              {/* Drag Hint Overlay */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#15181B]/90 border border-[#292D32] text-[11px] font-mono text-zinc-400 flex items-center gap-1.5 backdrop-blur-md z-30"
+              >
+                <Sliders className="w-3.5 h-3.5 text-[#FF8A00]" />
+                <span>Drag or swipe horizontally &bull; Click to focus</span>
+              </div>
+
+              {/* 3D Spatial Satellite Skills */}
+              <div
+                className="relative w-full h-full flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {skillsList.map((skill: SkillItem, idx: number) => {
+                  const N = skillsList.length;
+                  const angle = (2 * Math.PI * idx) / N + rotationAngle;
+                  const isFeatured = !!skill.featured;
+
+                  // Elliptical 3D orbit radii
+                  const rx = typeof window !== "undefined" && window.innerWidth < 640 ? 150 : 280;
+                  const ry = typeof window !== "undefined" && window.innerWidth < 640 ? 60 : 100;
+
+                  const x = Math.sin(angle) * rx;
+                  const y = Math.cos(angle) * ry;
+                  const z = Math.cos(angle) * 160 + (isFeatured ? 25 : 0);
+
+                  // Normalized depth from 0 (back) to 1 (front)
+                  const depthFactor = (z + 185) / 370;
+                  const scale = shouldReduceMotion ? 1 : 0.82 + depthFactor * 0.28;
+                  const opacity = shouldReduceMotion ? 1 : 0.45 + depthFactor * 0.55;
+                  const isFront = z > 20;
+                  const isSelected = idx === activeSkillIdx;
+
+                  return (
                     <motion.div
                       key={skill.name}
-                      variants={cardVariants}
-                      whileHover={
-                        shouldReduceMotion
-                          ? {}
-                          : { y: -4, transition: { duration: 0.2 } }
-                      }
-                      className="group relative p-5 rounded-2xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.6),0_0_15px_rgba(255,138,0,0.12)]"
+                      onClick={() => setActiveSkillIdx(idx)}
+                      style={{
+                        position: "absolute",
+                        transformStyle: "preserve-3d",
+                        zIndex: Math.round(z + 300),
+                      }}
+                      animate={{
+                        x,
+                        y,
+                        z,
+                        scale: isSelected ? scale * 1.08 : scale,
+                        opacity,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 28,
+                      }}
+                      className={`cursor-pointer select-none p-3.5 sm:p-4 rounded-2xl border backdrop-blur-xl transition-colors duration-200 flex items-center gap-3 shadow-lg ${
+                        isSelected
+                          ? "bg-[#15181B] border-[#FF8A00] shadow-[0_0_25px_rgba(255,138,0,0.35)]"
+                          : isFront
+                          ? "bg-[#15181B]/95 border-[#FF8A00]/40 hover:border-[#FF8A00]/80"
+                          : "bg-[#15181B]/75 border-[#292D32] hover:border-zinc-500"
+                      }`}
                     >
-                      <div className="space-y-3">
-                        {/* Top row: Icon & Proficiency Label */}
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="w-10 h-10 rounded-xl bg-[#191C20] border border-[#292D32] flex items-center justify-center text-zinc-200 group-hover:border-[#FF8A00]/50 group-hover:scale-105 transition-all duration-200">
-                            <SkillTechIcon icon={skill.icon} />
-                          </div>
-                          {/* Proficiency Badge (NO fake percentages) */}
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#FF8A00]/10 text-[#FFB020] border border-[#FF8A00]/20">
-                            <CheckCircle className="w-3 h-3 text-[#FF8A00]" />
-                            <span>{skill.level}</span>
-                          </span>
-                        </div>
-
-                        {/* Skill Name */}
-                        <div>
-                          <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-[#FFB020] transition-colors">
-                            {skill.name}
-                          </h4>
-                          {skill.badge && (
-                            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wide">
-                              {skill.badge}
-                            </span>
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#191C20] border border-[#292D32] flex items-center justify-center shrink-0">
+                        <SkillTechIcon icon={skill.icon} />
+                      </div>
+                      <div className="min-w-0 pr-1">
+                        <p className="text-xs sm:text-sm font-bold text-white truncate flex items-center gap-1.5">
+                          <span>{skill.name}</span>
+                          {isFeatured && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00] shrink-0" />
                           )}
-                        </div>
-
-                        {/* Practical Description */}
-                        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                          {skill.description}
+                        </p>
+                        <p className="text-[10px] font-mono text-[#FFB020] uppercase truncate">
+                          {skill.level}
                         </p>
                       </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
 
-                      {/* Bottom Subtle Indicator */}
-                      <div className="mt-4 pt-3 border-t border-white/[0.04] flex items-center justify-between text-[11px] font-mono text-zinc-500">
-                        <span>Application Focus</span>
-                        <span className="text-[#FF8A00] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                          <Sparkles className="w-3 h-3" />
-                          <span>Active</span>
+            {/* Focused Skill HUD Stage & Step Controls */}
+            <div className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] shadow-xl relative overflow-hidden">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF8A00]/40 to-transparent"
+              />
+
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                {/* Left: Skill Identity & Description */}
+                <div className="space-y-3 max-w-2xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-[#191C20] border border-[#FF8A00]/40 flex items-center justify-center text-white shadow-md">
+                      <SkillTechIcon icon={currentSkill.icon} className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-xl sm:text-2xl font-bold text-white">
+                          {currentSkill.name}
+                        </h4>
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#FF8A00]/15 text-[#FFB020] border border-[#FF8A00]/30">
+                          <CheckCircle className="w-3 h-3 text-[#FF8A00]" />
+                          <span>{currentSkill.level}</span>
                         </span>
                       </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </motion.div>
+                      {currentSkill.badge && (
+                        <p className="text-xs font-mono text-zinc-400 uppercase tracking-wide">
+                          {currentSkill.badge}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-zinc-300 leading-relaxed">
+                    {currentSkill.description}
+                  </p>
+                </div>
+
+                {/* Right: Orbit Navigation Controls */}
+                <div className="flex flex-col items-start lg:items-end gap-3 w-full lg:w-auto">
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => stepRotation(-1)}
+                      aria-label="Previous Skill"
+                      className="px-3.5 py-2 rounded-xl bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-200 hover:text-white flex items-center gap-1.5 text-xs font-mono transition-all duration-200 active:scale-95 cursor-pointer"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      <span>Prev</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => stepRotation(1)}
+                      aria-label="Next Skill"
+                      className="px-3.5 py-2 rounded-xl bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-200 hover:text-white flex items-center gap-1.5 text-xs font-mono transition-all duration-200 active:scale-95 cursor-pointer"
+                    >
+                      <span>Next</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setRotationAngle(0);
+                        setActiveSkillIdx(0);
+                      }}
+                      aria-label="Reset View"
+                      title="Reset View"
+                      className="p-2 rounded-xl bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/50 text-zinc-400 hover:text-white transition-all cursor-pointer"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <span className="text-xs font-mono text-zinc-500">
+                    Technology {activeSkillIdx + 1} of {skillsList.length}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* VIEW MODE 2: Detailed Card Grid (Accessible View)          */}
+        {/* ========================================================= */}
+        {viewMode === "detailed" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {skillsList.map((skill: SkillItem) => (
+              <div
+                key={skill.name}
+                className="p-5 rounded-2xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/50 transition-all duration-200 flex flex-col justify-between space-y-4 shadow-md"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-[#191C20] border border-[#292D32] flex items-center justify-center">
+                      <SkillTechIcon icon={skill.icon} />
+                    </div>
+                    <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FFB020]">
+                      {skill.level}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="text-base font-bold text-white">
+                      {skill.name}
+                    </h4>
+                    {skill.badge && (
+                      <p className="text-[11px] font-mono text-zinc-400 uppercase">
+                        {skill.badge}
+                      </p>
+                    )}
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {skill.description}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/[0.04] text-[11px] font-mono text-zinc-500 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00]" />
+                  <span>Core Technical Skill</span>
+                </div>
+              </div>
             ))}
-          </AnimatePresence>
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

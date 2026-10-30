@@ -1,7 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import React, { useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   Mail,
@@ -32,8 +40,82 @@ interface FormState {
   hp: string;
 }
 
+// Subtle magnetic button that gently tracks cursor on hover without interfering with usability
+function MagneticSubmitButton({
+  isSubmitting,
+  disabled,
+}: {
+  isSubmitting: boolean;
+  disabled: boolean;
+}) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { stiffness: 220, damping: 18 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (shouldReduceMotion || disabled) return;
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    // Controlled magnetic displacement (max 5px)
+    const deltaX = (e.clientX - centerX) * 0.18;
+    const deltaY = (e.clientY - centerY) * 0.18;
+    mouseX.set(Math.max(-6, Math.min(6, deltaX)));
+    mouseY.set(Math.max(-6, Math.min(6, deltaY)));
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.button
+      ref={buttonRef}
+      type="submit"
+      disabled={disabled}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        x: shouldReduceMotion ? 0 : smoothX,
+        y: shouldReduceMotion ? 0 : smoothY,
+      }}
+      whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+      whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all duration-200 active:scale-95 border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] disabled:opacity-60 cursor-pointer select-none"
+    >
+      {isSubmitting ? (
+        <>
+          <span className="w-4 h-4 border-2 border-[#0B0D0F]/30 border-t-[#0B0D0F] rounded-full animate-spin" />
+          <span>Sending Message...</span>
+        </>
+      ) : (
+        <>
+          <Send className="w-4 h-4" />
+          <span>Send Message</span>
+        </>
+      )}
+    </motion.button>
+  );
+}
+
 export default function Contact() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Gentle scroll parallax on background curve lines
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgCurveParallaxY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
 
   const [formState, setFormState] = useState<FormState>({
     name: "",
@@ -170,13 +252,17 @@ export default function Contact() {
 
   return (
     <section
+      ref={sectionRef}
       id="contact"
       aria-label="Contact and Social Profiles"
       className="relative min-h-screen w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] scroll-mt-20 overflow-hidden"
     >
-      {/* Subtle Warm Brown & Orange Flowing Background Graphics */}
-      <div
+      {/* Subtle Warm Brown & Orange Flowing Background Graphics with Slow Scroll Parallax */}
+      <motion.div
         aria-hidden="true"
+        style={{
+          y: shouldReduceMotion ? 0 : bgCurveParallaxY,
+        }}
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         {/* Soft radial illumination behind form (right) and status info (left) */}
@@ -229,7 +315,7 @@ export default function Contact() {
             fill="none"
           />
         </svg>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto w-full space-y-16 sm:space-y-20">
         {/* ========================================================= */}
@@ -275,7 +361,9 @@ export default function Contact() {
             {/* Availability Status Card */}
             <motion.div
               variants={itemVariants}
-              className="p-6 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] backdrop-blur-md relative overflow-hidden"
+              whileHover={shouldReduceMotion ? {} : { y: -2 }}
+              transition={{ duration: 0.2 }}
+              className="p-6 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/30 backdrop-blur-md relative overflow-hidden transition-all shadow-md hover:shadow-[0_12px_24px_rgba(0,0,0,0.4)]"
             >
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-3 w-3">
@@ -294,7 +382,9 @@ export default function Contact() {
             {/* Direct Email Card with One-Click Copy */}
             <motion.div
               variants={itemVariants}
-              className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all backdrop-blur-md space-y-4"
+              whileHover={shouldReduceMotion ? {} : { y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all backdrop-blur-md space-y-4 shadow-md hover:shadow-[0_15px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(255,138,0,0.08)]"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#FFB020] font-semibold">
@@ -360,7 +450,7 @@ export default function Contact() {
                 {SOCIAL_PROFILES.map((social) => {
                   const isExternal = !social.href.startsWith("mailto:");
                   return (
-                    <a
+                    <motion.a
                       key={social.name}
                       href={social.href}
                       {...(isExternal
@@ -368,7 +458,9 @@ export default function Contact() {
                         : {})}
                       aria-label={social.ariaLabel}
                       title={social.ariaLabel}
-                      className="group p-4 rounded-xl sm:rounded-2xl bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-200 flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00]"
+                      whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                      transition={{ duration: 0.18 }}
+                      className="group p-4 rounded-xl sm:rounded-2xl bg-[#15181B] hover:bg-[#191C20] border border-[#292D32] hover:border-[#FF8A00]/40 transition-all duration-200 flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] shadow-sm hover:shadow-md"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="w-9 h-9 rounded-lg bg-[#191C20] border border-[#292D32] flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:border-[#FF8A00]/40 shrink-0 transition-colors">
@@ -388,7 +480,7 @@ export default function Contact() {
                       ) : (
                         <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#FF8A00] transition-colors shrink-0 ml-2" />
                       )}
-                    </a>
+                    </motion.a>
                   );
                 })}
               </div>
@@ -411,16 +503,46 @@ export default function Contact() {
           </motion.div>
 
           {/* ========================================================= */}
-          {/* RIGHT COLUMN: Clean Contact Form UI Ready for Integration */}
+          {/* RIGHT COLUMN: Floating 3D Panel Contact Form UI           */}
           {/* ========================================================= */}
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7"
+            style={{ perspective: 1200 }}
+            className="lg:col-span-7 relative"
           >
-            <div className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] backdrop-blur-xl shadow-xl space-y-6">
+            {/* Ambient Floating Glow Backdrop */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-3 sm:-inset-5 rounded-3xl sm:rounded-[36px] bg-gradient-to-tr from-[#FF8A00]/10 via-amber-600/5 to-transparent blur-2xl -z-10"
+            />
+
+            {/* Floating Top-Right Gateway Indicator Chip */}
+            <motion.div
+              style={{
+                transform: shouldReduceMotion ? "none" : "translateZ(26px)",
+              }}
+              className="absolute -top-3.5 right-6 z-30 hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191C20] border border-[#FF8A00]/30 text-[10px] font-mono text-[#FFB020] shadow-md backdrop-blur-md"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00] animate-pulse" />
+              <span>Direct Secure Route</span>
+            </motion.div>
+
+            <div
+              style={{
+                transform: shouldReduceMotion ? "none" : "translateZ(14px)",
+                transformStyle: "preserve-3d",
+              }}
+              className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-[#15181B] border border-[#292D32] hover:border-[#FF8A00]/30 backdrop-blur-xl shadow-2xl space-y-6 relative overflow-hidden transition-colors"
+            >
+              {/* Subtle top edge specular accent */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"
+              />
+
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   /* Form Submission Success Card */
@@ -504,7 +626,7 @@ export default function Contact() {
                           value={formState.name}
                           onChange={handleInputChange}
                           placeholder="e.g. Alex Johnson"
-                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] focus:shadow-[0_0_15px_rgba(255,138,0,0.12)] transition-all duration-200"
                         />
                       </div>
 
@@ -524,7 +646,7 @@ export default function Contact() {
                           value={formState.email}
                           onChange={handleInputChange}
                           placeholder="e.g. alex@company.com"
-                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] focus:shadow-[0_0_15px_rgba(255,138,0,0.12)] transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -542,7 +664,7 @@ export default function Contact() {
                         name="inquiryType"
                         value={formState.inquiryType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] focus:shadow-[0_0_15px_rgba(255,138,0,0.12)] transition-all duration-200 cursor-pointer"
                       >
                         {INQUIRY_TYPES.map((type) => (
                           <option key={type} value={type} className="bg-[#15181B] text-white">
@@ -568,29 +690,16 @@ export default function Contact() {
                         value={formState.message}
                         onChange={handleInputChange}
                         placeholder="Share a brief overview of your project, timeline, or inquiry..."
-                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] transition-all resize-y min-h-[110px]"
+                        className="w-full px-4 py-3 rounded-xl bg-[#101214] border border-[#292D32] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF8A00] focus:ring-1 focus:ring-[#FF8A00] focus:shadow-[0_0_15px_rgba(255,138,0,0.12)] transition-all duration-200 resize-y min-h-[110px]"
                       />
                     </div>
 
-                    {/* Submit Button & Micro Disclaimer */}
+                    {/* Submit Button with Subtle Magnetic Effect & Micro Disclaimer */}
                     <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                      <button
-                        type="submit"
+                      <MagneticSubmitButton
+                        isSubmitting={isSubmitting}
                         disabled={isSubmitting}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-[#0B0D0F] bg-[#FF8A00] hover:bg-[#E86F00] shadow-[0_0_20px_rgba(255,138,0,0.3)] hover:shadow-[0_0_30px_rgba(232,111,0,0.45)] transition-all duration-200 active:scale-95 border border-[#FFB020]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] disabled:opacity-60 cursor-pointer"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <span className="w-4 h-4 border-2 border-[#0B0D0F]/30 border-t-[#0B0D0F] rounded-full animate-spin" />
-                            <span>Sending Message...</span>
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-4 h-4" />
-                            <span>Send Message</span>
-                          </>
-                        )}
-                      </button>
+                      />
 
                       <p className="text-[11px] text-zinc-500 sm:text-right">
                         Typically responds within 24–48 hours
