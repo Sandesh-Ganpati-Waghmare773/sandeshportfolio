@@ -401,15 +401,11 @@ export default function Footer() {
         {/* Bottom Bar: Copyright & Enhanced Back to Top              */}
         {/* ========================================================= */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start text-center sm:text-left">
             <span>
               &copy; {currentYear}{" "}
               <span className="text-zinc-300 font-medium">Sandesh Waghmare</span>.
               All rights reserved.
-            </span>
-            <span className="hidden sm:inline text-zinc-600">&bull;</span>
-            <span className="text-zinc-500">
-              Crafted with Next.js &amp; Tailwind CSS
             </span>
           </div>
 
